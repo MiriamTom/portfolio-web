@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Projects of MT</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
+        <!-- Custom Google font-->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+ <style>
+        #matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+    opacity: 0.2;
+    }
+
+    body {
+      background-color: #121217;
+      color: #eee;
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      margin: 0; padding: 0;
+    }
+    main {
+      padding: 1rem 1rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    h1 {
+      font-weight: 900;
+      font-size: 3rem;
+      text-align: center;
+      margin-bottom: 3rem;
+      background: linear-gradient(90deg, #42b7db 0%, #21007c 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+.project {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  align-items: center;
+  animation: fadeSlideIn 0.7s ease forwards;
+  opacity: 0;
+  transform: translateY(20px);
+  box-shadow: 0 8px 20px rgba(149, 49, 158, 0.2);
+
+  /* Pridané pozadie so zvýšenou nepriehľadnosťou */
+  background-color: rgba(7, 2, 2, 0.5); /* biela s 85 % nepriehľadnosťou */
+  border-radius: 12px; /* voliteľné, nech to vyzerá lepšie */
+  padding: 1rem; /* voliteľné, pridá vnútorný okraj */
+}
+
+    .project:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .project img {
+      max-width: 280px;
+      border-radius: 12px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 20px rgba(0, 255, 255, 0.2);
+    }
+    .project-content {
+      flex: 1;
+      min-width: 250px;
+    }
+    .project-content h2 {
+      font-weight: 700;
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      color: #bf47ca;
+    }
+    .project-section {
+      margin-bottom: 1rem;
+    }
+    .project-section strong {
+      display: inline-block;
+      margin-bottom: 0.25rem;
+      font-weight: 700;
+      color: #4facfe;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .project-section p {
+      margin: 0;
+      line-height: 1.5;
+      color: #ccc;
+    }
+    .project-link {
+      margin-top: 1rem;
+      display: inline-block;
+      font-weight: 600;
+      color: #00f2fe;
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: border-color 0.3s ease;
+    }
+    .project-link:hover {
+      border-color: #4facfe;
+    }
+
+    @keyframes fadeSlideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .project {
+        flex-direction: column !important;
+      }
+      .project img {
+        max-width: 100%;
+      }
+      main {
+        padding: 1rem;
+      }
+    }
+  </style>
+    </head>
+    <body class="d-flex flex-column h-100 bg-dark"><canvas id="matrix"></canvas>
+
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-light  py-3">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-secondary">Bc. Miriam Tomášová</span></a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                            <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+                            <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                            <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
+                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+        <h1 class="display-5 fw-bolder mb-0">
+        <span class="text-gradient d-inline">Projects</span>
+        </h1>
+        <div class="fs-3 fw-light text-muted animate__animated animate__fadeInDown">
+        <em>noun</em> /ˈprɒ.dʒekt/ — a brilliant idea that started at 2 AM and turned into three weeks of debugging.
+        </div>
+        <div class="fs-5 fw-light text-muted animate__animated animate__fadeInDown">
+        <span class="fst-italic">Example:</span> I just wanted to make a simple to-do app. Now it sends emails, makes coffee, and judges my procrastination.
+        </div>
+
+
+    <div class="project">
+      <img src="https://clipartmag.com/images/health-clipart-pictures-34.png" alt="Health Receiver" />
+      <div class="project-content">
+        <h2>Bahcelor Thesis - Health Receiver</h2>
+        <div class="project-section">
+          <p>Health Receiver is a web application used to display users' health and location data obtained from the cloud. Data is collected from wearable devices (e.g. Huawei watches) and sent via the MQTT protocol.</p>
+        </div>
+        <div class="project-section">
+          <strong>Languages:</strong>
+          <p>JavaScript, MQTT, HTML, CSS, WebSockets</p>
+        </div>
+        <div class="project-section">
+          <strong>Purpose:</strong>
+          <p>Pre efektívne zobrazovanie a spracovanie údajov zo zdravotných wearables v reálnom čase.</p>
+        </div>
+        <div class="project-section">
+          <strong>Outcome::</strong>
+          <p>Zabezpečená robustná vizualizácia zdravotných a lokalizačných dát pre lepšiu kontrolu používateľa nad svojím zdravím.</p>
+        </div>
+        <a class="project-link" href="https://homel.vsb.cz/~tom0468/HTML-HR/" target="_blank"><i class="bi bi-web"></i> View on Website </a> 
+        <a class="project-link" href="https://github.com/MiriamTom/" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+      
+    </div>
+    </div>
+
+    <div class="project">
+      <img src="assets/logo_print_W.png" alt="Watergate Project" />
+      <div class="project-content">
+        <h2>Watergate Project</h2>
+        <div class="project-section">
+          <p>A web-based solution for flood management and environmental protection, involving the building of dams and water retention systems. (In progress)</p>
+        </div>
+        <div class="project-section">
+          <strong>Languages:</strong>
+          <p>HTML, CSS, JavaScript, </p>
+        </div>
+        <div class="project-section">
+          <strong>Purpose</strong>
+          <p>learn how to create pages and administer web projects throughout the entire development process from requirements gathering to deployment.</p>
+        </div>
+        <div class="project-section">
+          <strong>Outcome::</strong>
+          <p>Developed web platform</p>
+        </div>
+        <a class="project-link" href="https://homel.vsb.cz/~tom0468/Watergate/" target="_blank"><i class="bi bi-web"></i> View on Website</a>
+      </div>
+    </div>
+
+    <div class="project">
+      <img src="https://img.itch.zone/aW1hZ2UvMjY2NjY3LzE0MDQxOTEucG5n/original/8H4ZV1.png" alt="RATMAZE game" />
+      <div class="project-content">
+        <h2>RATMAZE game</h2>
+        <div class="project-section">
+          <p>Ratmaze is a JavaFX-based maze game where players control a rat through intricate mazes, collect cheese, avoid cats, and reach the exit point to progress through levels. The game features background music and offers an immersive experience with dynamic gameplay elements.</p>
+        </div>
+        <div class="project-section">
+          <strong>Languages:</strong>
+          <p>Java, JavaFX</p>
+        </div>
+        <div class="project-section">
+          <strong>Purpose:</strong>
+          <p>Create a fun and interactive game to improve programming skills in JavaFX.</p>
+        </div>
+        <div class="project-section">
+          <strong>Outcome::</strong>
+          <p>A complete game with multiple levels that has received positive feedback from users.</p>
+        </div>
+        <a class="project-link" href="https://github.com/MiriamTom/RATMAZE_game" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+      </div>
+    </div>
+
+    <div class="project">
+    <img src="https://gamegfx.spielaffe.de/images/game/307/307417/42369_2048-Puzzle-Game-rcm180x180u.png" alt="2048 Game" />
+    <div class="project-content">
+        <h2>2048</h2>
+        <div class="project-section">
+        <p>This project contains the game 2048 implemented in the C language. 2048 is a single-player sliding tile puzzle game where the goal is to combine tiles to reach the magic number: 2048.</p>
+        <p>Two years after creating the game, an AI model was added — because why play yourself when your code can play for you (and probably better)?</p>
+        </div>
+        <div class="project-section">
+        <strong>Languages:</strong>
+        <p>C, Python</p>
+        </div>
+        <div class="project-section">
+        <strong>Purpose:</strong>
+        <p>To learn and implement basic algorithms and data structures in C.</p>
+        </div>
+        <div class="project-section">
+        <strong>Outcome:</strong>
+        <p>Fully playable version of 2048, later enhanced with an AI in Python that can solve the game — or at least pretend to be a genius.</p>
+        </div>
+        <a class="project-link" href="https://github.com/MiriamTom/2048" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+    </div>
+    </div>
+
+        <div class="project">
+        <img src="assets/music.png" alt="Music Catalog">
+        <div class="project-content">
+            <h2>Music Catalog System</h2>
+            <div class="project-section">
+                <p>Java-based app for managing a music library with artist, album and track info, including search functionality.</p>
+            </div>
+            <div class="project-section">
+                <strong>Languages:</strong> 
+                <p>Java, JDBC, SQL</p>
+            </div>
+            <div class="project-section">
+            <strong>Purpose:</strong>
+                <p> Semester project to practice Java backend and GUI integration.</p>
+            </div>
+            <div class="project-section">
+            <strong>Outcome:</strong> 
+                <p>Robust desktop app with real-time filtering and persistent storage.</p>
+            </div>
+            <a class="project-link" href="https://github.com/your-repo/music-catalog" target="_blank"><i class="bi bi-github"></i> View on GitHub</a>
+            </a>
+        </div>
+    </div>
+        </main>
+            <!-- Footer -->
+            <footer class="bg-dark text-light py-4 mt-auto">
+                <div class="container px-5">
+                    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+                        <div class="col-auto mb-3 mb-sm-0">
+                            <div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="d-flex gap-3 fs-5">
+                                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
+                                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+
+        <script>
+  const canvas = document.getElementById('matrix');
+  const ctx = canvas.getContext('2d');
+
+  canvas.height = window.innerHeight;
+  canvas.width = window.innerWidth;
+
+  const binary = "01";
+  const fontSize = 14;
+  const columns = canvas.width / fontSize;
+
+  const drops = Array.from({ length: columns }).fill(1);
+
+  function draw() {
+    ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = "#00f2fe";
+    ctx.font = fontSize + "px monospace";
+
+    for (let i = 0; i < drops.length; i++) {
+      const text = binary.charAt(Math.floor(Math.random() * binary.length));
+      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+
+      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+        drops[i] = 0;
+      }
+      drops[i]++;
+    }
+  }
+
+  setInterval(draw, 50);
+
+  window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+</script>
+
+    </body>
+</html>
