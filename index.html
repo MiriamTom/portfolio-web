@@ -1,350 +1,430 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Website of Miriam Tomášová</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Miriam Tomášová — portfolio</title>
+    <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
     <style>
-#preloader {
-  position: fixed;
-  inset: 0;
-  background-color: #000;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  transition: opacity 0.5s ease, visibility 0.5s ease;
-}
+        /* unified theme + refined animations */
+        #hero-canvas { position:fixed; top:0; left:0; width:100%; height:100%; z-index:0; pointer-events:none; opacity:0.5; }
+        .hero-wrapper { position:relative; z-index:2; min-height:100vh; display:flex; align-items:center; padding:5rem 0 3rem; }
 
-#preloader.fade-out {
-  opacity: 0;
-  visibility: hidden;
-}
+        /* elegant floating title animation (no glitch) – gentle wave & subtle glow */
+        .elegant-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.4rem, 7vw, 5.2rem);
+            line-height: 1.1;
+            color: #f5efe6;
+            display: inline-block;
+            background: linear-gradient(135deg, #f5efe6 0%, #d4a853 40%, #c0392b 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: softFloat 4s ease-in-out infinite, textGlowPulse 3s infinite alternate;
+            text-shadow: 0 0 8px rgba(192,57,43,0.3);
+        }
+        @keyframes softFloat {
+            0% { transform: translateY(0px) scale(1); letter-spacing: -0.02em; }
+            50% { transform: translateY(-6px) scale(1.01); letter-spacing: -0.01em; }
+            100% { transform: translateY(0px) scale(1); letter-spacing: -0.02em; }
+        }
+        @keyframes textGlowPulse {
+            0% { text-shadow: 0 0 2px rgba(192,57,43,0.2); }
+            100% { text-shadow: 0 0 15px rgba(212,168,83,0.4), 0 0 5px rgba(192,57,43,0.6); }
+        }
 
-.loader-logo {
-  width: 400px;
-  animation: bounce 1s infinite;
-}
+        .hero-role-tag {
+            display: inline-block;
+            padding: .25em .9em;
+            border: 1px solid rgba(192,57,43,.5);
+            background: rgba(192,57,43,.08);
+            color: #e74c3c;
+            border-radius: 2rem;
+            font-size: .7rem;
+            font-weight: 700;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            margin-right: .5rem;
+            margin-bottom: .5rem;
+            backdrop-filter: blur(2px);
+        }
 
-.loader-text {
-  margin-top: 1rem;
-  color: #fff;
-  font-size: 1.2rem;
-  font-family: 'Comic Sans MS', cursive, sans-serif;
-}
+        /* modern typewriter with smooth cursor */
+        .typewriter-modern {
+            font-size: clamp(1rem, 2.5vw, 1.25rem);
+            color: #b9b9c5;
+            font-weight: 400;
+            border-right: 2px solid #d4a853;
+            padding-right: 6px;
+            animation: blinkSoft 1s step-end infinite;
+        }
+        @keyframes blinkSoft {
+            0%, 100% { border-color: #d4a853; }
+            50% { border-color: transparent; }
+        }
 
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-20px); }
-}
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: 2rem;
+            padding: .75rem 2rem;
+            background: linear-gradient(135deg, #c0392b, #d4a853);
+            color: white;
+            border-radius: 3rem;
+            font-weight: 700;
+            text-decoration: none;
+            transition: transform .2s, box-shadow .2s;
+        }
+        .hero-cta:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(192,57,43,.4); color: white; }
+        .hero-cta-ghost {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            margin-top: 2rem;
+            margin-left: .75rem;
+            padding: .75rem 2rem;
+            background: transparent;
+            color: #f5efe6;
+            border: 1px solid #2a2a2a;
+            border-radius: 3rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: border-color .2s, color .2s;
+        }
+        .hero-cta-ghost:hover { border-color: #c0392b; color: #e74c3c; }
 
- .fact-slider-wrapper {
-  overflow: hidden;
-  width: 100%;
-  position: relative;
-}
+        /* profile picture styling */
+        .profile-frame {
+            position: relative;
+            width: 500px;
+            height: 500px;
+            margin: 0 auto;
+            border-radius: 38% 62% 70% 30% / 42% 38% 62% 58%;
+            background: linear-gradient(135deg, #c0392b20, #d4a85320);
+            padding: 8px;
+            backdrop-filter: blur(2px);
+            animation: morphShape 12s ease-in-out infinite;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.5);
+        }
+        .profile-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: inherit;
+            filter: grayscale(12%) contrast(1.05);
+            transition: filter 0.4s ease, transform 0.3s;
+        }
+        .profile-frame:hover img {
+            filter: grayscale(0%);
+            transform: scale(1.01);
+        }
+        @keyframes morphShape {
+            0% { border-radius: 38% 62% 70% 30% / 42% 38% 62% 58%; }
+            25% { border-radius: 50% 50% 40% 60% / 60% 40% 60% 40%; }
+            50% { border-radius: 62% 38% 48% 52% / 48% 55% 45% 52%; }
+            75% { border-radius: 45% 55% 62% 38% / 55% 45% 55% 45%; }
+            100% { border-radius: 38% 62% 70% 30% / 42% 38% 62% 58%; }
+        }
 
-.fact-slider {
-  display: flex;
-  gap: 1rem;
-  animation: scrollFacts 20s linear infinite;
-}
+        .facts-section { background: #111; border-top: 1px solid #2a2a2a; border-bottom: 1px solid #2a2a2a; padding: 3rem 0; position: relative; z-index: 2; }
+        .fact-slider-wrapper { overflow: hidden; width: 100%; }
+        .fact-slider { display: flex; gap: 1.2rem; animation: scrollFacts 36s linear infinite; width: max-content; }
+        .fact-card { min-width: 320px; background: #161616; border: 1px solid #2a2a2a; border-radius: 20px; padding: 1.2rem 1.5rem; color: #e8e0d5; font-family: monospace; transition: all 0.2s; backdrop-filter: blur(4px); }
+        .fact-card:hover { border-color: #c0392b; transform: scale(1.01); }
+        @keyframes scrollFacts {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
+        .reveal.visible { opacity: 1; transform: none; }
 
-.fact-card {
-  min-width: 300px;
-  max-width: 400px;
-  background-color: #1e1e2f;
-  border-radius: 12px;
-  padding: 1.5rem;
-  color: #fff;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
-  font-family: 'Courier New', monospace;
-  flex-shrink: 0;
-  transition: transform 0.3s ease;
-
-  white-space: normal;     /* umožní zalamovanie textu */
-  word-wrap: break-word;   /* zlomí dlhé slová ak treba */
-  line-height: 1.4;        /* lepšie čítanie */
-}
-
-@keyframes scrollFacts {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); } /* zmeň podľa dĺžky obsahu */
-}
-
+        /* responsive */
+        @media (max-width: 992px) {
+            .profile-frame { width: 300px; height: 240px; margin-top: 2rem; }
+            .hero-wrapper { padding: 3rem 0 2rem; min-height: auto; }
+            .hero-cta, .hero-cta-ghost { margin-top: 1rem; }
+        }
+        @media (max-width: 992px) {
+            .profile-frame { width: 200px; height: 200px; }
+            .fact-card { min-width: 260px; }
+        }
+        .card { background-color: #161616 !important; border: 1px solid #2a2a2a !important; transition: all 0.25s; }
+        .card:hover { border-color: #c0392b !important; transform: translateY(-4px); box-shadow: 0 12px 28px rgba(192,57,43,0.2); }
     </style>
+</head>
+<body class="d-flex flex-column h-100">
+<canvas id="hero-canvas"></canvas>
 
-    </head>
-    <body class="d-flex flex-column h-100">
-        <!-- Preloader -->
-        <div id="preloader">
-        <div class="loader-container">
-            <img src="assets/trans_bg.png" alt="Logo" class="loader-logo" />
-            <p class="loader-text">Loading awesomeness...</p>
-        </div>
-        </div>
+<div id="preloader">
+    <div class="loader-logo-ring"></div>
+    <p class="loader-text" id="loaderText">loading universe...</p>
+</div>
 
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-light">Bc. Miriam Tomášová</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
-                            <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-                            <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
+<nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top" style="background: #0a0c12cc; backdrop-filter: blur(12px); z-index:100; border-bottom:1px solid #2a3346;">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder" style="color:#f5efe6;font-family:'Syne',sans-serif;">Bc. Miriam Tomášová</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="thesis.html">Bc.Thesis</a></li>
+                <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-shrink-0">
+    <div class="hero-wrapper">
+        <div class="container px-4">
+            <div class="row gx-5 align-items-center">
+                <div class="col-lg-7">
+                    <div class="mb-3">
+                        <span class="hero-role-tag">Design</span>
+                        <span class="hero-role-tag">Dev</span>
+                        <span class="hero-role-tag">Research</span>
+                        <span class="hero-role-tag">Photography</span>
+                    </div>
+                    <!-- new elegant title without glitch -->
+                    <h1 class="elegant-title">Every detail<br>tells a story.</h1>
+                    <p style="color:#a0a0b0; font-size:clamp(0.95rem,2vw,1.2rem); margin-top:1rem;">
+                        <span id="typewriter" class="typewriter-modern"></span>
+                    </p>
+                    <div>
+                        <a href="projects.html" class="hero-cta"><i class="bi bi-folder2-open"></i> View Projects</a>
+                        <a href="resume.html" class="hero-cta-ghost"><i class="bi bi-file-person"></i> Résumé</a>
                     </div>
                 </div>
-            </nav>
-            <!-- Header-->
-            <header class="py-5">
-                <div class="container px-5 pb-5">
-                    <div class="row gx-5 align-items-center animate__animated animate__fadeInDown">
-                        <div class="col-xxl-5">
-                            <!-- Header text content-->
-                            <div class="text-center text-xxl-start">
-                                <div class="badge bg-gradient-primary-to-secondary text-white mb-4"><div class="text-uppercase">Design &middot; Softwer  Development &middot; Video Making</div></div>
-                                <div class="fs-3 fw-light text-muted animate__animated animate__fadeInDown">Bc. Miriam Tomášová</div>
-                                <h1 class="display-3 fw-bolder mb-5 animate__animated animate__fadeInDown">
-                                    <span class="text-gradient d-inline">Every detail tells a story</span></h1>
-                                <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xxl-start mb-3">
-                                    <a class="btn btn-primary btn-lg px-5 py-3 me-sm-3 fs-6 fw-bolder" href="resume.html">Résumé</a>
-                                    <a class="btn btn-secondary btn-lg px-5 py-3 fs-6 fw-bolder" href="projects.html">Projects</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xxl-7">
-                            <!-- Header profile picture-->
-                            <div class="d-flex justify-content-center mt-5 mt-xxl-0">
-                                <div class="profile bg-gradient-primary-to-secondary">
-                                    <!-- TIP: For best results, use a photo with a transparent background like the demo example below-->
-                                    <!-- Watch a tutorial on how to do this on YouTube (link)-->
-                                    <img class="profile-img" src="assets/profile.png" alt="..." />
-                                    <div class="dots-1">
-                                        <!-- SVG Dots-->
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4" xml:space="preserve">
-                                            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                                <path d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z"></path>
-                                                <path d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z"></path>
-                                                <path d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z"></path>
-                                                <path d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z"></path>
-                                                <path d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z"></path>
-                                                <path d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z"></path>
-                                                <path d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z"></path>
-                                                <path d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z"></path>
-                                                <path d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z"></path>
-                                                <path d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z"></path>
-                                                <path d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z"></path>
-                                                <path d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z"></path>
-                                                <path d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z"></path>
-                                                <path d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z"></path>
-                                                <path d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z"></path>
-                                                <path d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z"></path>
-                                                <path d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z"></path>
-                                                <path d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z"></path>
-                                                <path d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z"></path>
-                                                <path d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z"></path>
-                                            </g>
-                                        </svg>
-                                        <!-- END of SVG dots-->
-                                    </div>
-                                    <div class="dots-2">
-                                        <!-- SVG Dots-->
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4" xml:space="preserve">
-                                            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                                <path d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z"></path>
-                                                <path d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z"></path>
-                                                <path d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z"></path>
-                                                <path d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z"></path>
-                                                <path d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z"></path>
-                                                <path d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z"></path>
-                                                <path d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z"></path>
-                                                <path d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z"></path>
-                                                <path d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z"></path>
-                                                <path d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z"></path>
-                                                <path d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z"></path>
-                                                <path d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z"></path>
-                                                <path d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z"></path>
-                                                <path d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z"></path>
-                                                <path d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z"></path>
-                                                <path d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z"></path>
-                                                <path d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z"></path>
-                                                <path d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z"></path>
-                                                <path d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z"></path>
-                                                <path d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z"></path>
-                                            </g>
-                                        </svg>
-                                        <!-- END of SVG dots-->
-                                    </div>
-                                    <div class="dots-3">
-                                        <!-- SVG Dots-->
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4" xml:space="preserve">
-                                            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                                <path d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z"></path>
-                                                <path d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z"></path>
-                                                <path d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z"></path>
-                                                <path d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z"></path>
-                                                <path d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z"></path>
-                                                <path d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z"></path>
-                                                <path d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z"></path>
-                                                <path d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z"></path>
-                                                <path d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z"></path>
-                                                <path d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z"></path>
-                                                <path d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z"></path>
-                                                <path d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z"></path>
-                                                <path d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z"></path>
-                                                <path d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z"></path>
-                                                <path d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z"></path>
-                                                <path d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z"></path>
-                                                <path d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z"></path>
-                                                <path d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z"></path>
-                                                <path d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z"></path>
-                                                <path d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z"></path>
-                                            </g>
-                                        </svg>
-                                        <!-- END of SVG dots-->
-                                    </div>
-                                    <div class="dots-4">
-                                        <!-- SVG Dots-->
-                                        <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 191.6 1215.4" style="enable-background: new 0 0 191.6 1215.4" xml:space="preserve">
-                                            <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)">
-                                                <path d="M227.7,12788.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,12801.6,289.7,12808.6,227.7,12788.6z"></path>
-                                                <path d="M1507.7,12788.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,12801.6,1569.7,12808.6,1507.7,12788.6z"></path>
-                                                <path d="M227.7,11508.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,11521.6,289.7,11528.6,227.7,11508.6z"></path>
-                                                <path d="M1507.7,11508.6c-151-50-253-216-222-362c25-119,136-230,254-255c194-41,395,142,375,339c-11,105-90,213-190,262        C1663.7,11521.6,1569.7,11528.6,1507.7,11508.6z"></path>
-                                                <path d="M227.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,10241.6,289.7,10248.6,227.7,10228.6z"></path>
-                                                <path d="M1507.7,10228.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,10241.6,1569.7,10248.6,1507.7,10228.6z"></path>
-                                                <path d="M227.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,8961.6,289.7,8968.6,227.7,8948.6z"></path>
-                                                <path d="M1507.7,8948.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,8961.6,1569.7,8968.6,1507.7,8948.6z"></path>
-                                                <path d="M227.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,7681.6,289.7,7688.6,227.7,7668.6z"></path>
-                                                <path d="M1507.7,7668.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,7681.6,1569.7,7688.6,1507.7,7668.6z"></path>
-                                                <path d="M227.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,6401.6,289.7,6408.6,227.7,6388.6z"></path>
-                                                <path d="M1507.7,6388.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,6401.6,1569.7,6408.6,1507.7,6388.6z"></path>
-                                                <path d="M227.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,5121.6,289.7,5128.6,227.7,5108.6z"></path>
-                                                <path d="M1507.7,5108.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,5121.6,1569.7,5128.6,1507.7,5108.6z"></path>
-                                                <path d="M227.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,3841.6,289.7,3848.6,227.7,3828.6z"></path>
-                                                <path d="M1507.7,3828.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,3841.6,1569.7,3848.6,1507.7,3828.6z"></path>
-                                                <path d="M227.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,2561.6,289.7,2568.6,227.7,2548.6z"></path>
-                                                <path d="M1507.7,2548.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,2561.6,1569.7,2568.6,1507.7,2548.6z"></path>
-                                                <path d="M227.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C383.7,1281.6,289.7,1288.6,227.7,1268.6z"></path>
-                                                <path d="M1507.7,1268.6c-105-35-200-141-222-248c-43-206,163-412,369-369c155,32,275,190,260,339c-11,105-90,213-190,262        C1663.7,1281.6,1569.7,1288.6,1507.7,1268.6z"></path>
-                                            </g>
-                                        </svg>
-                                        <!-- END of SVG dots-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                <div class="col-lg-4 d-flex justify-content-center mt-5 mt-lg-0">
+                    <!-- profile image (profile.png) integrated with morphing frame -->
+                    <div class="profile-frame">
+                        <img src="me.jpg" alt="Miriam Tomášová profile"; this.onerror=null;">
                     </div>
-                </div>
-            </header>
-            <!-- About Section with Fun Facts Slider -->
-            <section class="bg-dark py-5 overflow-hidden">
-            <div class="container px-5">
-                <div class="text-center my-5">
-                <h2 class="display-5 fw-bolder text-white mb-4">
-                    <span class="text-gradient d-inline">What I Do (and Know)</span>
-                </h2>
-                <p class="lead text-light"> I code smart systems, design intuitive interfaces, and create stories through code & photography.</p>
-                </div>
-
-                <!-- Slider Container -->
-                <div class="fact-slider-wrapper">
-                <div class="fact-slider" id="factSlider">
-                    <!-- Cards will be inserted here by JavaScript -->
-                </div>
                 </div>
             </div>
-            </section>
+        </div>
+    </div>
 
-            <!-- Footer -->
-            <footer class="bg-dark text-light py-4 mt-auto">
-                <div class="container px-5">
-                    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                        <div class="col-auto mb-3 mb-sm-0">
-                            <div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div>
+    <section class="facts-section">
+        <div class="container px-5">
+            <div class="text-center mb-4 reveal">
+                <h2 class="display-6 fw-bolder"><span class="text-gradient">What I Do (and Know)</span></h2>
+                <p style="color:#888;">I code smart systems, design intuitive interfaces, and create stories through code &amp; photography.</p>
+            </div>
+            <div class="fact-slider-wrapper">
+                <div class="fact-slider" id="factSlider"></div>
+            </div>
+        </div>
+    </section>
+
+    <section style="padding:4rem 0;position:relative;z-index:2;">
+        <div class="container px-5">
+            <div class="row g-4">
+                <div class="col-md-4 reveal">
+                    <a href="projects.html" style="text-decoration:none;">
+                        <div class="card p-4 h-100">
+                            <div style="font-size:2rem;margin-bottom:.75rem;">⚡</div>
+                            <h5 style="color:#d4a853;font-family:'Syne',sans-serif;">Projects</h5>
+                            <p style="color:#888;font-size:.9rem;margin:0;">From maze games to IoT health systems — code that actually runs.</p>
                         </div>
-                        <div class="col-auto">
-                            <div class="d-flex gap-3 fs-5">
-                                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
-                                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
-            </footer>
+                <div class="col-md-4 reveal" style="transition-delay:.1s">
+                    <a href="research.html" style="text-decoration:none;">
+                        <div class="card p-4 h-100">
+                            <div style="font-size:2rem;margin-bottom:.75rem;">🧠</div>
+                            <h5 style="color:#d4a853;font-family:'Syne',sans-serif;">Research</h5>
+                            <p style="color:#888;font-size:.9rem;margin:0;">AI, impostor syndrome &amp; future anxiety — serious stuff, playfully presented.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-4 reveal" style="transition-delay:.2s">
+                    <a href="videoprojects.html" style="text-decoration:none;">
+                        <div class="card p-4 h-100">
+                            <div style="font-size:2rem;margin-bottom:.75rem;">📸</div>
+                            <h5 style="color:#d4a853;font-family:'Syne',sans-serif;">Photography</h5>
+                            <p style="color:#888;font-size:.9rem;margin:0;">Just a hobby. But a very aesthetic one.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
-        <script>new WOW().init();</script>
-        <script>
-        const funnyTexts = [
-            "Summoning pixels...👾",
-            "Reticulating splines...",
-            "Feeding hamsters...🐹",
-            "Calculating personality...",
-            "Stealing cookies 🍪...",
-            "Finding Easter eggs 🥚..."
-        ];
-        const randomText = funnyTexts[Math.floor(Math.random() * funnyTexts.length)];
-        document.querySelector('.loader-text').textContent = randomText;
+<footer class="bg-dark text-light py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto mb-3 mb-sm-0"><div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div></div>
+            <div class="col-auto"><div class="d-flex gap-3 fs-5">
+                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
+            </div></div>
+        </div>
+    </div>
+</footer>
 
-        window.addEventListener('load', function () {
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // preloader randomness
+    const loaderTexts = ["initializing...", "loading awesomeness...", "compiling personality...", "git pull magic...", "rendering creativity"];
+    document.getElementById('loaderText').textContent = loaderTexts[Math.floor(Math.random() * loaderTexts.length)];
+    window.addEventListener('load', () => {
+        setTimeout(() => {
             const preloader = document.getElementById('preloader');
-            
-            // ⏱️ Tu pridáš oneskorenie pred fade-outom (napr. 2000 ms)
-            setTimeout(() => {
-            preloader.classList.add('fade-out');
-            }, 1500); // zmeň číslo podľa potreby (v milisekundách)
-        });
+            if(preloader) preloader.classList.add('fade-out');
+        }, 700);
+    });
 
-        const facts = [ 
-        "Why do programmers prefer dark mode? Because light attracts bugs!",
-        "Git commit message: 'Fixed everything. Definitely works this time.'",
+    // === new smooth typewriter (no glitch, just elegant) ===
+    const typedPhrases = [
+        "Bc. Miriam Tomášová",
+        "CS student @ ČVUT Prague",
+        "Builder of things that run",
+        "ENFJ with a debugger",
+        "Occasionally takes great photos"
+    ];
+    let phraseIndex = 0, charIndex = 0, isDeleting = false;
+    const typewriterEl = document.getElementById('typewriter');
+
+    function typeEffect() {
+        const current = typedPhrases[phraseIndex];
+        if (!isDeleting) {
+            typewriterEl.textContent = current.substring(0, charIndex + 1);
+            charIndex++;
+            if (charIndex === current.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2000);
+                return;
+            }
+        } else {
+            typewriterEl.textContent = current.substring(0, charIndex - 1);
+            charIndex--;
+            if (charIndex === 0) {
+                isDeleting = false;
+                phraseIndex = (phraseIndex + 1) % typedPhrases.length;
+                setTimeout(typeEffect, 300);
+                return;
+            }
+        }
+        setTimeout(typeEffect, isDeleting ? 45 : 70);
+    }
+    typeEffect();
+
+    // === particle + network canvas (dark elegant) ===
+    const canvas = document.getElementById('hero-canvas');
+    const ctx = canvas.getContext('2d');
+    let width = window.innerWidth, height = window.innerHeight;
+
+    function resizeCanvas() {
+        width = window.innerWidth;
+        height = window.innerHeight;
+        canvas.width = width;
+        canvas.height = height;
+    }
+    resizeCanvas();
+    window.addEventListener('resize', resizeCanvas);
+
+    const particles = Array.from({ length: 60 }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        radius: Math.random() * 2 + 0.8,
+        dx: (Math.random() - 0.5) * 0.4,
+        dy: (Math.random() - 0.5) * 0.4,
+        alpha: Math.random() * 0.4 + 0.2
+    }));
+
+    function drawParticles() {
+        if (!ctx) return;
+        ctx.clearRect(0, 0, width, height);
+        // update & draw particles
+        for (let p of particles) {
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0) p.x = width;
+            if (p.x > width) p.x = 0;
+            if (p.y < 0) p.y = height;
+            if (p.y > height) p.y = 0;
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+            ctx.fillStyle = `rgba(192, 87, 67, ${p.alpha})`;
+            ctx.fill();
+        }
+        // connections
+        for (let i = 0; i < particles.length; i++) {
+            for (let j = i + 1; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.hypot(dx, dy);
+                if (dist < 120) {
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.strokeStyle = `rgba(212, 168, 83, ${0.08 * (1 - dist / 120)})`;
+                    ctx.lineWidth = 0.6;
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(drawParticles);
+    }
+    drawParticles();
+
+    // === dynamic fact slider (double length) ===
+    const funFacts = [
+        "Why do programmers prefer dark mode? Because light attracts bugs! 🐛",
+        "Git commit: 'Fixed everything. Definitely works this time.' 🤞",
         "Stack Overflow: where 90% of your code is actually born.",
-        "There are 10 kinds of people: those who understand binary and those who don’t.",
+        "There are 10 kinds of people: those who understand binary and those who don't.",
         "To understand recursion, you must first understand recursion.",
-        "A programmer’s wife tells him to go to the store and buy a loaf of bread. If they have eggs, buy a dozen. He comes home with 12 loaves of bread.",
-        "Commenting code: 'If you're reading this, I'm sorry.'",
-        "Debugging is like being the detective in a crime movie where you are also the murderer.",
-        "I changed the code and it didn’t break. Time to panic.",
-        "Behind every successful software project is a confused developer googling in panic."
-        ];
-
-        const slider = document.getElementById('factSlider');
-        const extendedFacts = [...facts, ...facts]; // repeat for infinite effect
-
-        extendedFacts.forEach(text => {
-        const card = document.createElement('div');
-        card.className = 'fact-card';
-        card.innerText = text; // innerText handles line breaks better than textContent
-        slider.appendChild(card);
+        "Debugging: being the detective in a crime where you're also the murderer.",
+        "I changed the code and it didn't break. Time to panic. 😱",
+        "Behind every great software is a developer googling in panic.",
+        "It's not a bug, it's an undocumented feature. 🎉",
+        "Coffee: the original container dependency.",
+        "99% of errors happen between keyboard and chair.",
+        "A programmer's favorite sound? The compiler saying 'success'."
+    ];
+    const slider = document.getElementById('factSlider');
+    if (slider) {
+        [...funFacts, ...funFacts].forEach(text => {
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'fact-card';
+            cardDiv.textContent = text;
+            slider.appendChild(cardDiv);
         });
+    }
 
-        </script>
-    </body>
+    // scroll reveal
+    const revealElements = document.querySelectorAll('.reveal');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.15 });
+    revealElements.forEach(el => observer.observe(el));
+
+    // additional subtle hover on profile frame
+    const profileImg = document.querySelector('.profile-frame img');
+    if (profileImg && !profileImg.complete) {
+        profileImg.addEventListener('error', () => {
+            profileImg.src = 'https://placehold.co/400x400/1e1e2a/d4a853?text=Miriam+Photo';
+        });
+    }
+</script>
+</body>
 </html>

@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Thesis — Health Receiver | Miriam Tomášová</title>
+    <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <!-- unified styles.css (the same dark theme) -->
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        /* additional thesis-specific styling — consistent with styles.css palette */
+        body {
+            background: #0a0c12;
+            color: #eef2ff;
+        }
+        #thesis-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+            opacity: 0.12;
+        }
+        .thesis-wrapper {
+            position: relative;
+            z-index: 2;
+        }
+        .thesis-header {
+            text-align: center;
+            padding: 2rem 0 1rem;
+        }
+        .thesis-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.2rem, 6vw, 3.8rem);
+            background: linear-gradient(135deg, #FFFFFF 0%, #c0392b 40%, #d4a853 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .thesis-sub {
+            color: #9ca3af;
+            border-bottom: 1px dashed rgba(192,57,43,0.4);
+            display: inline-block;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        .thesis-card {
+            background: rgba(18, 22, 35, 0.75);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(90, 120, 180, 0.25);
+            border-radius: 28px;
+            padding: 1.8rem;
+            transition: all 0.25s ease;
+            margin-bottom: 2rem;
+        }
+        .thesis-card:hover {
+            border-color: #c0392b;
+            box-shadow: 0 12px 32px rgba(192,57,43,0.2);
+        }
+        .badge-thesis {
+            background: rgba(192,57,43,0.2);
+            border: 1px solid #c0392b;
+            color: #d4a853;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+        .struggle-box {
+            background: rgba(192,57,43,0.08);
+            border-left: 5px solid #c0392b;
+            border-radius: 20px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        .diagram-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+        .diagram-card {
+            background: #111317;
+            border-radius: 24px;
+            padding: 1rem;
+            text-align: center;
+            border: 1px solid #2a2e3f;
+            transition: transform 0.2s;
+            flex: 1;
+            min-width: 200px;
+        }
+        .diagram-card img {
+            max-width: 100%;
+            border-radius: 16px;
+            background: #1e1f2c;
+            padding: 0.5rem;
+        }
+        .diagram-card:hover {
+            transform: translateY(-5px);
+            border-color: #c0392b;
+        }
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+        .tech-item {
+            background: #1e1e2a;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.75rem;
+            color: #d4a853;
+            border: 1px solid #3a3f55;
+        }
+        .school-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: linear-gradient(135deg, #c0392b, #a52a1a);
+            padding: 0.7rem 1.8rem;
+            border-radius: 60px;
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .school-link:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(192,57,43,0.4);
+            color: white;
+        }
+        hr {
+            border-color: #2a2a3a;
+        }
+        @media (max-width: 768px) {
+            .thesis-card { padding: 1.2rem; }
+            .diagram-grid { flex-direction: column; align-items: center; }
+        }
+    </style>
+</head>
+<body>
+<canvas id="thesis-canvas"></canvas>
+
+<!-- same navbar as other pages -->
+<nav class="navbar navbar-expand-lg navbar-dark py-3 sticky-top" style="background: #0a0c12cc; backdrop-filter: blur(12px); z-index:100; border-bottom:1px solid #2a3346;">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder" style="color:#f5efe6;font-family:'Syne',sans-serif;">Bc. Miriam Tomášová</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="thesis.html">Bc.Thesis</a></li>
+                <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-shrink-0 thesis-wrapper">
+    <div class="container px-5 py-4">
+        <div class="thesis-header">
+            <h1 class="thesis-title">📡 Health Receiver<br><span style="font-size: 1.2rem;">Bachelor Thesis — IoT & Wearable Data Ecosystem</span></h1>
+            <p class="thesis-sub mt-3">Real‑time health monitoring · BLE · Cloud sync · MQTT</p>
+        </div>
+
+        <!-- Overview card -->
+        <div class="thesis-card">
+            <div class="d-flex flex-wrap justify-content-between align-items-start gap-3">
+                <div>
+                    <span class="badge-thesis"><i class="bi bi-check-circle-fill"></i> Defense: 2024</span>
+                    <span class="badge-thesis ms-2"><i class="bi bi-star-fill"></i> Faculty of Electrical Engineering and Computer Science</span>
+                </div>
+                <a href="https://homel.vsb.cz/~tom0468/HTML-HR/" target="_blank" class="school-link" style="background:#1f2a3e; border:1px solid #c0392b;">
+                    <i class="bi bi-box-arrow-up-right"></i> Live demo (web viewer)
+                </a>
+            </div>
+            <h3 class="mt-4" style="color:#d4a853; font-family:'Syne',sans-serif;"><i class="bi bi-diagram-3"></i> What is Health Receiver?</h3>
+            <p style="font-size:1.05rem; line-height:1.5;">A complete IoT-based system that collects <strong>health & location data</strong> from wearables (Huawei watches), transmits it via <strong>MQTT</strong> and <strong>BLE</strong>, stores in the cloud, and visualizes it through a web dashboard. Designed for two data strategies: <strong>realtime high-frequency streaming</strong> and <strong>aggregated long-term records</strong>. The solution includes an Android data collector + cloud backend + interactive frontend.</p>
+
+            <div class="tech-stack">
+                <span class="tech-item"><i class="bi bi-android2"></i> Android (Java)</span>
+                <span class="tech-item"><i class="bi bi-bluetooth"></i> BLE / Gadgetbridge</span>
+                <span class="tech-item"><i class="bi bi-cloud-upload"></i> MQTT · Firebase</span>
+                <span class="tech-item"><i class="bi bi-hdd-stack"></i> Cloud Storage</span>
+                <span class="tech-item"><i class="bi bi-graph-up"></i> WebSockets · Chart.js</span>
+            </div>
+        </div>
+
+        <!-- abstract & languages -->
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="thesis-card h-100">
+                    <h4 style="color:#c0392b;"><i class="bi bi-file-text"></i> Abstract </h4>
+                    <p class="small" style="color:#ccd6f0;">Cílem této bakalářské práce je navrhnout a implementovat systém pro záznam hodnot životních funkcí a pohybových aktivit z nositelné elektroniky (wearables). Podporuje dvě strategie měření: Realtime hustá data přenášená s maximální frekvencí; Agregovaná data z delších intervalů. Systém zahrnuje mobilní aplikaci pro Android komunikující přes BLE, lokální úložiště a synchronizaci s cloudem pro analýzy.</p>
+                    <hr class="my-2">
+                    <h4 style="color:#c0392b;"><i class="bi bi-code-slash"></i> Languages & Tech</h4>
+                    <div class="tech-stack">
+                        <span class="tech-item">Java (Android)</span>
+                        <span class="tech-item">MQTT</span>
+                        <span class="tech-item">WebSockets</span>
+                        <span class="tech-item">JavaScript</span>
+                        <span class="tech-item">HTML5/CSS3</span>
+                        <span class="tech-item">Firebase / Realtime DB</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="thesis-card h-100">
+                    <h4 style="color:#c0392b;"><i class="bi bi-trophy"></i> Outcome & Impact</h4>
+                    <p>✅ Robust real‑time visualization of heart rate, steps, GPS trails.<br>
+                        ✅ Two data collection modes: live streaming + aggregated daily stats.<br>
+                        ✅ Seamless cloud sync (local cache → remote storage).<br>
+                        ✅ MQTT integration for low‑latency IoT data flow.<br>
+                        ✅ Successfully tested with Huawei wearables; scalable architecture.</p>
+                    <div class="mt-2">
+                        <a href="https://github.com/MiriamTom/health-receiver" target="_blank" class="hero-cta-ghost" style="display:inline-block; margin:0; padding:0.4rem 1rem;"><i class="bi bi-github"></i> Thesis repo (part)</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- WHERE I STRUGGLED MOST – “lamala hlavu” section -->
+        <div class="struggle-box mt-4">
+            <div class="d-flex align-items-center gap-3 flex-wrap">
+                <i class="bi bi-emoji-dizzy" style="font-size: 2.5rem; color:#c0392b;"></i>
+                <h3 style="margin:0; font-family:'Syne',sans-serif;">🔧 Where I broke my brain (the real struggle)</h3>
+            </div>
+            <p class="mt-3">Developing <strong>Health Receiver</strong> wasn't just about code — it was a battle against real‑time constraints, Bluetooth instabilities, and cloud sync nightmares. Here are the top challenges that almost made me question my life choices:</p>
+            <ul style="list-style-type: none; padding-left: 0;">
+                <li class="mb-2"><i class="bi bi-x-octagon-fill" style="color:#c0392b; margin-right: 10px;"></i> <strong>BLE reliability hell:</strong> Keeping a stable Bluetooth Low Energy connection with Huawei watches while fetching high‑frequency heart rate samples without draining the battery — Gadgetbridge integration required deep reverse‑engineering.</li>
+                <li class="mb-2"><i class="bi bi-cloud-slash-fill" style="color:#d4a853; margin-right: 10px;"></i> <strong>Cloud sync conflicts:</strong> Offline-first architecture + periodic sync → managing conflicts between local SQLite and remote Firebase led to duplicate entries and corrupted timestamps. Solved with version vectors and last‑write‑win logic.</li>
+                <li class="mb-2"><i class="bi bi-mqtt" style="color:#e74c3c; margin-right: 10px;"></i> <strong>MQTT latency & QoS:</strong> Real-time data needed near‑instant delivery but the broker sometimes dropped packages under poor network. Implemented a fallback retry queue with exponential backoff.</li>
+                <li class="mb-2"><i class="bi bi-graph-up" style="color:#c0392b; margin-right: 10px;"></i> <strong>Visualizing thousands of points:</strong> Web frontend choked on 10k+ datapoints → adopted canvas-based downsampling and WebSocket throttling.</li>
+                <li><i class="bi bi-phone-x" style="color:#d4a853; margin-right: 10px;"></i> <strong>Android background limitations:</strong> Modern Android killed background BLE services → switched to foreground service with persistent notification and adaptive wake locks.</li>
+            </ul>
+            <p class="mb-0 fst-italic text-muted">After 3 sleepless nights, 14 cups of coffee, and dozens of logcat traces — the system finally streamed data like a charm. ✨</p>
+        </div>
+
+        <!-- Diagrams Section: sequence.png, log.png, architecture diagram -->
+        <div class="thesis-card mt-4">
+            <h4 style="color:#d4a853;"><i class="bi bi-file-diagram"></i> System diagrams & technical insights</h4>
+            <p class="small">Below you can see the core architecture: communication flow (sequence diagram), logging mechanism, and data pipeline visualisation.</p>
+            <div class="diagram-grid">
+                <div class="diagram-card">
+                    <img src="assets/Sequent_diagram.png" alt = "Sequence diagram - BLE to cloud flow" onerror="this.src='https://placehold.co/400x250/1e1e2a/d4a853?text=Sequence+Diagram+(BLE+→+Cloud)';">
+                    <p class="mt-2 mb-0"><strong>🔁 Sequence diagram</strong><br>MQTT / BLE handshake + cloud sync</p>
+                </div>
+                <div class="diagram-card">
+                    <img src="assets/Performance.png" alt="Logging and error handling diagram" onerror="this.src='https://placehold.co/400x250/1e1e2a/d4a853?text=Log+Analysis+&+Error+Handling';">
+                    <p class="mt-2 mb-0"><strong>📜 Log & monitoring</strong><br>Debugging the real‑time pipeline</p>
+                </div>
+                <div class="diagram-card">
+                    <img src="assets/Diagram_struc.jpg" alt="High level architecture" onerror="this.src='https://placehold.co/400x250/1e1e2a/d4a853?text=System+Architecture+(Wearable+→+Web)';">
+                    <p class="mt-2 mb-0"><strong>🏛️ Architecture overview</strong><br>Android, cloud, MQTT broker, web viewer</p>
+                </div>
+            </div>
+            <div class="alert alert-dark mt-3" style="background:#888aaa; border-color:#c0392b40;">
+                <i class="bi bi-info-circle-fill"></i> The diagrams represent the final data flow: Huawei watch → Gadgetbridge (BLE) → local DB → cloud (Firebase) → MQTT → web dashboard. The sequence diagram details the exact request-response pattern, while log.png shows my custom debugging layer.
+            </div>
+        </div>
+
+        <!-- Thesis goals & methodology -->
+        <div class="row g-4 mt-2">
+            <div class="col-md-5">
+                <div class="thesis-card h-100">
+                    <h4><i class="bi bi-pencil-square"></i> Core objectives (from assignment)</h4>
+                    <ol style="padding-left: 1.2rem;">
+                        <li>Research wearables, data frequency & available APIs.</li>
+                        <li>Build Android app for data collection via BLE (Gadgetbridge integration).</li>
+                        <li>Design cloud sync mechanism with scalability.</li>
+                        <li>Implement web app for viewing stored records.</li>
+                        <li>Test & compare with existing solutions.</li>
+                    </ol>
+                    <span class="badge-thesis mt-2"><i class="bi bi-check2-all"></i> All objectives fully met</span>
+                </div>
+            </div>
+            <div class="col-md-7">
+                <div class="thesis-card h-100">
+                    <h4><i class="bi bi-bar-chart-steps"></i> What happened under the hood</h4>
+                    <p>💡 <strong>Real-time dense data</strong> – up to 1 sample/sec from Huawei watch (HR, steps, accelerometer).<br>
+                        💡 <strong>Aggregated long-term data</strong> – daily summaries stored in cloud for trend analysis.<br>
+                        💡 <strong>Gadgetbridge fork</strong> – extended open-source library to forward sensor values to custom MQTT topics.<br>
+                        💡 <strong>Web dashboard</strong> – Leaflet maps + dynamic charts (Chart.js) + WebSocket live updates.<br>
+                        💡 <strong>Offline resilience</strong> – Room database caches measurements and retries sync on network recovery.</p>
+                    <div class="mt-2">
+                        <a href="https://gadgetbridge.org/" target="_blank" class="school-link" style="background:#c0392b20; border:1px solid #c0392b; color:#f0c0a0;">
+                            <i class="bi bi-eye-fill"></i> GadgetBridge App
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Official school link & repository -->
+        <div class="thesis-card text-center mt-4">
+            <h5 style="font-family:'Syne',sans-serif;"><i class="bi bi-university"></i> Official thesis publication</h5>
+            <p class="mb-3">The full text is available through the VŠB‑TUO repository (faculty of electrical engineering and computer science).</p>
+            <a href="https://dspace.vsb.cz/items/a7bcbd14-676a-4c88-971e-d3cd9fbeeb5c" target="_blank" class="school-link" style="background: #1f2a3e; border:1px solid #d4a853;">
+                <i class="bi bi-archive"></i> View at VŠB digital library
+            </a>
+            <p class="mt-3 small text-muted">(thesis ID: BP0468 / 2024 — Health Receiver: IoT platform for wearable health data)</p>
+        </div>
+    </div>
+</main>
+
+<footer class="bg-dark text-light py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto mb-3 mb-sm-0"><div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div></div>
+            <div class="col-auto"><div class="d-flex gap-3 fs-5">
+                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
+            </div></div>
+        </div>
+    </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // background grid + scanline effect (matching projects page)
+    const thesisCanvas = document.getElementById('thesis-canvas');
+    const tCtx = thesisCanvas.getContext('2d');
+    function resizeThesisCanvas() {
+        thesisCanvas.width = window.innerWidth;
+        thesisCanvas.height = window.innerHeight;
+        drawThesisGrid();
+    }
+    function drawThesisGrid() {
+        if (!tCtx) return;
+        tCtx.clearRect(0, 0, thesisCanvas.width, thesisCanvas.height);
+        const step = 38;
+        tCtx.strokeStyle = '#c0392b';
+        tCtx.lineWidth = 0.4;
+        for (let x = 0; x < thesisCanvas.width; x += step) {
+            tCtx.beginPath();
+            tCtx.moveTo(x, 0);
+            tCtx.lineTo(x, thesisCanvas.height);
+            tCtx.stroke();
+        }
+        for (let y = 0; y < thesisCanvas.height; y += step) {
+            tCtx.beginPath();
+            tCtx.moveTo(0, y);
+            tCtx.lineTo(thesisCanvas.width, y);
+            tCtx.stroke();
+        }
+        tCtx.fillStyle = 'rgba(8,10,20,0.18)';
+        tCtx.fillRect(0, 0, thesisCanvas.width, thesisCanvas.height);
+    }
+    window.addEventListener('resize', () => {
+        resizeThesisCanvas();
+        drawThesisGrid();
+    });
+    resizeThesisCanvas();
+    drawThesisGrid();
+
+    // optional: image fallback for missing diagrams (already handled with onerror)
+    console.log("Bachelor thesis page — Health Receiver: IoT + wearables, real-time data, struggles included.");
+</script>
+</body>
+</html>

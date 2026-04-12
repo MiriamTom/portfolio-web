@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Research — Miriam Tomášová</title>
+    <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        /* RESEARCH-SPECIFIC: Neural net node animation */
+        #neural-canvas { position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0.18; }
+        .research-wrapper { position:relative;z-index:2; }
+        .research-hero { padding:5rem 0 3rem; }
+        .stat-box { background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:1.25rem;text-align:center;transition:border-color .25s,transform .2s; }
+        .stat-box:hover { border-color:#c0392b;transform:translateY(-3px); }
+        .stat-num { font-family:'Syne',sans-serif;font-size:2rem;font-weight:800;color:#d4a853; }
+        .stat-label { font-size:.8rem;color:#888;text-transform:uppercase;letter-spacing:.08em; }
+        .among-canvas-container { position:fixed;bottom:20px;right:20px;width:130px;height:130px;z-index:999;pointer-events:none;filter:drop-shadow(0 8px 20px rgba(0,0,0,.5)); }
+        canvas#amongCanvas { width:100%;height:100%;display:block;cursor:pointer;pointer-events:auto;transition:transform .2s; }
+        canvas#amongCanvas:hover { transform:scale(1.05); }
+        .among-tip { position:fixed;bottom:160px;right:25px;background:#1a1a1a;border:1px solid #c0392b;border-radius:16px;padding:6px 12px;font-size:11px;color:#d4a853;z-index:1000;pointer-events:none;font-family:monospace;white-space:nowrap; }
+        .reveal { opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s ease; }
+        .reveal.visible { opacity:1;transform:none; }
+        @media(max-width:650px){ .among-canvas-container{width:90px;height:90px;bottom:10px;right:10px;} .among-tip{bottom:110px;right:10px;font-size:9px;} }
+
+        .btn-survey {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, #c0392b 0%, #8B1A1A 100%);
+            color: white;
+            padding: 0.9rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(212, 168, 83, 0.3);
+            box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
+        }
+
+        .btn-survey:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
+            background: linear-gradient(135deg, #d44536 0%, #a01f1f 100%);
+            color: white;
+        }
+
+        .btn-survey i {
+            font-size: 1.2rem;
+        }
+
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<canvas id="neural-canvas"></canvas>
+
+<!-- Among Us easter egg -->
+<div class="among-canvas-container">
+    <canvas id="amongCanvas" width="200" height="200"></canvas>
+</div>
+
+<a href="https://among-ai-bd510.web.app/"><div class="among-tip" id="amongTip" >✨ sus? 👀 click me! </div> </a>
+
+<nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 sticky-top" style="z-index:100;">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder" style="color:#f5efe6;font-family:'Syne',sans-serif;">Bc. Miriam Tomášová</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="thesis.html">Bc.Thesis</a></li>
+                <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<main class="flex-shrink-0 research-wrapper">
+    <div class="container px-5">
+        <!-- Hero -->
+        <div class="research-hero text-center reveal">
+            <div class="badge-sus mb-3">🔬 Research in Progress</div>
+            <h1 class="display-5 fw-bolder mb-2" style="font-family:'Syne',sans-serif;"><span class="text-gradient">AI, Impostor Syndrome</span><br>&amp; Future Anxiety</h1>
+            <p style="color:#888;max-width:600px;margin:0 auto 1.5rem;">Investigating the psychological impact of AI tool usage on students — do they feel empowered, or secretly convinced they're frauds?</p>
+            <div style="display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:2rem;">
+                <span class="keyword-pill">Human-AI Interaction</span>
+                <span class="keyword-pill">Impostor Syndrome</span>
+                <span class="keyword-pill">Future Anxiety</span>
+                <span class="keyword-pill">ČVUT Prague</span>
+                <span class="keyword-pill">N = 215 students</span>
+                <span class="keyword-pill">start 2026</span>
+            </div>
+        </div>
+
+        <!-- Survey Participation Button -->
+        <div class="text-center reveal mb-5">
+            <a href="https://among-ai-bd510.web.app/" target="_blank" class="btn-survey">
+                <i class="bi bi-pencil-square me-2"></i>
+                Participate in the Survey
+                <i class="bi bi-arrow-right ms-2"></i>
+            </a>
+        </div>
+
+        <!-- Stats -->
+        <div class="row g-3 mb-5 reveal">
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">215</div><div class="stat-label">Respondents</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Scales Used</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">2026</div><div class="stat-label">Start</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">r≈.3</div><div class="stat-label">Correlation</div></div></div>
+        </div>
+
+        <!-- Research card -->
+        <div class="card-research p-4 p-md-5 mb-4 reveal">
+            <h3 style="font-family:'Syne',sans-serif;color:#f5efe6;margin-bottom:1rem;"><i class="bi bi-file-earmark-text me-2" style="color:#c0392b;"></i>Research Overview</h3>
+            <p style="color:#888;">This study explores the relationship between AI assistant usage frequency, impostor syndrome, and future anxiety among tech students. The central question: does using AI make you feel more capable — or more like a fraud?</p>
+            <div class="research-quote mt-3 mb-3">
+                "Am I actually good at this, or did the AI do it for me?" — every student, ever.
+            </div>
+            <div class="row g-3 mt-2">
+                <div class="col-md-4">
+                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
+                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Methodology</div>
+                        <p style="color:#888;font-size:.88rem;margin:0;">Quantitative survey (N=215). Standardized scales: Clance Impostor Phenomenon Scale, Future Anxiety Scale + custom AI usage frequency scale. Pearson correlation + linear regression.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
+                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Findings</div>
+                        <p style="color:#888;font-size:.88rem;margin:0;">Mild positive correlation between intensive AI use (&gt;5×/day) and higher impostor scores. Students who view AI as a learning tool show significantly lower anxiety. Passive reliance increases impostor feelings.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
+                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Implications</div>
+                        <p style="color:#888;font-size:.88rem;margin:0;">How should AI tools be designed to strengthen autonomy and confidence? Results to be presented at end of  2026.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <button class="btn-fun" id="bigResearchLink"><i class="bi bi-journal-text me-2"></i>Read Full Abstract</button>
+            </div>
+        </div>
+
+        <!-- About card -->
+        <div class="card-research p-4 p-md-5 mb-5 reveal">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 style="font-family:'Syne',sans-serif;color:#f5efe6;"><i class="bi bi-person-badge me-2" style="color:#c0392b;"></i>Bc. Miriam Tomášová</h4>
+                    <p style="color:#888;margin-top:.75rem;">Student of Managerial Informatics at ČVUT. I like connecting data, psychology, and playful design. This research grew from my own experience — how many times did I ask myself: "Am I actually good at this, or did the AI do it?" 🎭 So I decided to study it properly.</p>
+                    <a href="contact.html" style="color:#d4a853;font-weight:600;text-decoration:none;"><i class="bi bi-envelope me-1"></i>Contact for collaboration</a>
+                </div>
+                <div class="col-md-4 text-center mt-3 mt-md-0">
+                    <div style="display:inline-flex;align-items:center;justify-content:center;width:80px;height:80px;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.3);border-radius:50%;">
+                        <i class="bi bi-quote" style="font-size:2.5rem;color:#c0392b;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<!-- Abstract Modal -->
+<div class="modal fade" id="researchModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title fw-bold" style="color:#f5efe6;font-family:'Syne',sans-serif;"><i class="bi bi-newspaper me-2" style="color:#c0392b;"></i>Full Research Abstract</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body" style="max-height:65vh;overflow-y:auto;">
+                <h4 style="color:#d4a853;font-family:'Syne',sans-serif;">AI Assistants, Impostor Syndrome &amp; Future Anxiety</h4>
+                <p style="color:#888;font-size:.9rem;"><strong style="color:#e8e0d5;">Authors:</strong> Miriam Tomášová | Dept. of Informatics, ČVUT</p>
+                <hr style="border-color:#2a2a2a;">
+                <p style="color:#888;">This paper examines the relationship between AI assistant usage frequency, impostor syndrome, and future anxiety. The goal is to identify whether AI tools lead to synergistic effects (increased productivity and confidence) or psychological conflicts (doubts about abilities, increased anxiety). The research focuses on technical students, analyzing correlations between AI usage frequency and selected psychological variables.</p>
+                <p style="color:#888;"><strong style="color:#e8e0d5;">Methodology:</strong> Quantitative survey (N=215 students), standardized scales: Clance Impostor Phenomenon Scale, Future Anxiety Scale, custom AI usage frequency scale. Statistical analysis includes Pearson correlation and linear regression.</p>
+                <p style="color:#888;"><strong style="color:#e8e0d5;">Preliminary Findings:</strong> Mild positive correlation between intensive AI use (&gt;5× daily) and higher impostor scores, with a significant moderating effect — students who perceive AI as a "learning tool" show lower anxiety. Passive reliance on AI increases impostor feelings.</p>
+                <p style="color:#888;"><strong style="color:#e8e0d5;">Conclusions:</strong> Opens questions about designing AI tools that strengthen autonomy and confidence. Results to be presented at end of 2026.</p>
+                <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:.75rem;margin-top:1rem;">
+                    <i class="bi bi-envelope-paper" style="color:#c0392b;"></i> For more info or collaboration: mimi.tomasova@gmail.com
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-secondary rounded-pill" data-bs-dismiss="modal">Close</button>
+                <a href="#" class="btn-fun rounded-pill" id="fakeCite" style="padding:.5rem 1.5rem;">📖 Cite Research</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer class="bg-dark text-light py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto mb-3 mb-sm-0"><div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div></div>
+            <div class="col-auto"><div class="d-flex gap-3 fs-5">
+                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
+            </div></div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    // Neural net background
+    const nc=document.getElementById('neural-canvas');
+    const nctx=nc.getContext('2d');
+    nc.width=window.innerWidth;nc.height=window.innerHeight;
+    window.addEventListener('resize',()=>{nc.width=window.innerWidth;nc.height=window.innerHeight;});
+    const nodes=Array.from({length:35},()=>({x:Math.random()*nc.width,y:Math.random()*nc.height,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5}));
+    function drawNeural(){nctx.clearRect(0,0,nc.width,nc.height);
+        nodes.forEach(n=>{n.x+=n.dx;n.y+=n.dy;if(n.x<0||n.x>nc.width)n.dx*=-1;if(n.y<0||n.y>nc.height)n.dy*=-1;});
+        for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<200){nctx.beginPath();nctx.moveTo(nodes[i].x,nodes[i].y);nctx.lineTo(nodes[j].x,nodes[j].y);nctx.strokeStyle=`rgba(212,168,83,${.6*(1-d/200)})`;nctx.lineWidth=.8;nctx.stroke();}}}
+        nodes.forEach(n=>{nctx.beginPath();nctx.arc(n.x,n.y,2.5,0,Math.PI*2);nctx.fillStyle='rgba(192,57,43,0.9)';nctx.fill();});
+        requestAnimationFrame(drawNeural);}drawNeural();
+
+    // Among Us
+    (function(){
+        const canvas = document.getElementById('amongCanvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = 200;
+        canvas.height = 200;
+
+        // Load the image
+        const amongImg = new Image();
+        amongImg.src = 'assets/among.png'; // Make sure the file path is correct
+        let imgLoaded = false;
+
+        amongImg.onload = function() {
+            imgLoaded = true;
+            animate(); // Start animation only after image loads
+        };
+
+        let posX = 70, posY = 70;
+        let targetX = 70, targetY = 70;
+        let frame = 0;
+
+        function drawAmong(x, y) {
+            ctx.clearRect(0, 0, 200, 200);
+            if (imgLoaded) {
+                ctx.save();
+                // Draw image at position
+                ctx.drawImage(amongImg, x - 30, y - 30, 60, 60);
+                ctx.restore();
+            }
+        }
+
+        function animate() {
+            frame++;
+
+            if (frame % 40 === 0) {
+                targetX = 35 + Math.random() * 100;
+                targetY = 40 + Math.random() * 90;
+            }
+
+            posX += (targetX - posX) * 0.08;
+            posY += (targetY - posY) * 0.08;
+
+            posX = Math.min(165, Math.max(25, posX));
+            posY = Math.min(160, Math.max(30, posY));
+
+            drawAmong(posX, posY);
+
+            requestAnimationFrame(animate);
+        }
+
+        // Only start animation if image is already loaded
+        if (imgLoaded) {
+            animate();
+        }
+
+        // Open link when clicked
+        canvas.addEventListener('click', () => {
+            window.open('https://among-ai-bd510.web.app/', '_blank'); // Change to your desired URL
+            // Or use: window.location.href = 'https://example.com'; for same tab
+        });
+
+        // Optional: change tip text on click
+        canvas.addEventListener('click', () => {
+            document.getElementById('amongTip').textContent = '🧠 impostor syndrome? But you\'re doing great!';
+            setTimeout(() => {
+                document.getElementById('amongTip').textContent = '✨ sus? 👀 click me!';
+            }, 2000);
+        });
+    })();
+
+    // Modal
+    document.getElementById('bigResearchLink').addEventListener('click',e=>{e.preventDefault();new bootstrap.Modal(document.getElementById('researchModal')).show();});
+    document.getElementById('fakeCite')?.addEventListener('click',e=>{e.preventDefault();alert('BibTeX copied! (just kidding — but reach out for real citation 🎓)');});
+
+    // Scroll reveal
+    const revEls=document.querySelectorAll('.reveal');
+    // Scroll reveal - fixed version
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+</body>
+</html>

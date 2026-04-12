@@ -1,209 +1,226 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Personal</title>
-        <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-        <!-- Custom Google font-->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@100;200;300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet" />
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
-        <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
-    </head>
-    <body class="d-flex flex-column h-100 bg-dark">
-        <main class="flex-shrink-0">
-            <!-- Navigation-->
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-dark py-3">
-                <div class="container px-5">
-                    <a class="navbar-brand" href="index.html"><span class="fw-bolder text-secondary">Bc.Miriam Tomášová</span></a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
-                            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                            <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
-                            <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
-                            <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
-                            <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </nav>
-            
-    <!-- Page Content -->
-<!-- Page Content -->
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Résumé — Miriam Tomášová</title>
+    <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+    /* RESUME-SPECIFIC: Slow floating ink-blot background */
+    #resume-bg { position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;overflow:hidden; }
+    .ink-blob { position:absolute;border-radius:50%;filter:blur(80px);opacity:0.07;animation:inkFloat linear infinite; }
+    @keyframes inkFloat { 0%{transform:translateY(0) scale(1);} 50%{transform:translateY(-40px) scale(1.05);} 100%{transform:translateY(0) scale(1);} }
+    .resume-wrapper { position:relative;z-index:2; }
+    .section-label { font-family:'Syne',sans-serif;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color: #c0912b;font-weight:700;margin-bottom:1.25rem;display:flex;align-items:center;gap:.5rem; }
+    .section-label::after { content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(192,57,43,.4),transparent); }
+    .resume-card { background:#161616;border:1px solid #2a2a2a;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:1rem;transition:border-color .25s,transform .2s; }
+    .resume-card:hover { border-color:#c0392b;transform:translateX(4px); }
+    .year-badge { font-family:'Syne',sans-serif;font-size:.75rem;color:#d4a853;font-weight:700;letter-spacing:.05em; }
+    .degree-badge { display:inline-block;padding:.2em .7em;background:rgba(192,57,43,.15);border:1px solid rgba(192,57,43,.4);color:#e74c3c;border-radius:1rem;font-size:.7rem;font-weight:700; }
+    .skill-pill { display:inline-block;padding:.25em .75em;background:#1e1e1e;border:1px solid #333;color:#d4a853;border-radius:1rem;font-size:.75rem;margin:2px;transition:border-color .2s; }
+    .skill-pill:hover { border-color:#c0392b;color:#e74c3c; }
+    .lang-row { display:flex;align-items:center;gap:.75rem;margin-bottom:.5rem; }
+    .lang-level { font-size:.65rem;padding:.2em .6em;background:rgba(192,57,43,.2);border:1px solid rgba(192,57,43,.4);color:#e74c3c;border-radius:1rem;font-weight:700;min-width:3rem;text-align:center; }
+    .reveal { opacity:0;transform:translateY(20px);transition:opacity .6s ease,transform .6s ease; }
+    .reveal.visible { opacity:1;transform:none; }
+    </style>
+</head>
+<body class="d-flex flex-column h-100">
+<div id="resume-bg">
+    <div class="ink-blob" style="width:500px;height:500px;background:#2b5ac0;top:-100px;left:-150px;animation-duration:20s;"></div>
+    <div class="ink-blob" style="width:400px;height:400px;background:#d4a853;bottom:-100px;right:-100px;animation-duration:25s;animation-delay:-10s;"></div>
+    <div class="ink-blob" style="width:300px;height:300px;background:#2bc0af;top:40%;left:60%;animation-duration:18s;animation-delay:-5s;"></div>
+</div>
+<nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 sticky-top" style="z-index:100;">
+    <div class="container px-5">
+        <a class="navbar-brand" href="index.html"><span class="fw-bolder" style="color:#f5efe6;font-family:'Syne',sans-serif;">Bc. Miriam Tomášová</span></a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0 small fw-bolder">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+                <li class="nav-item"><a class="nav-link" href="projects.html">Projects</a></li>
+                <li class="nav-item"><a class="nav-link" href="thesis.html">Bc.Thesis</a></li>
+                <li class="nav-item"><a class="nav-link" href="research.html">Research</a></li>
+                <li class="nav-item"><a class="nav-link" href="videoprojects.html">Photography</a></li>
+                <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<main class="flex-shrink-0 resume-wrapper">
 <div class="container px-5 my-5">
-    <div class="text-center mb-5">
-        <h1 class="display-5 fw-bolder mb-0"><span class="text-gradient d-inline">Résumé</span></h1>
-        <div class="fs-3 fw-light text-muted animate__animated animate__fadeInDown">
-        <em>noun</em> /ˈrez.juː.meɪ/ <strong>(from French)</strong> — a short statement of the important details of something</div>
-        <div class="fs-5 fw-light text-muted animate__animated animate__fadeInDown">
-         <span class="fst-italic">Example:</span> After reading my résumé, they were so impressed they asked if I could also fix their printer.</div>
+    <div class="text-center mb-5 reveal">
+        <h1 class="display-5 fw-bolder mb-0" style="font-family:'Syne',sans-serif;"><span class="text-gradient">Résumé</span></h1>
+        <div style="color:#888;font-size:1.05rem;font-style:italic;margin-top:.5rem;">
+            <em>noun</em> /ˈrez.juː.meɪ/ — a short statement of the important details of something
+        </div>
+        <div style="color:#555;font-size:.9rem;margin-top:.25rem;">
+            After reading my résumé, they were so impressed they asked if I could also fix their printer.
+        </div>
     </div>
     <div class="row gx-5 justify-content-center">
-        <div class="col-lg-11 col-xl-10 col-xxl-10">
-            <div class="row">
-                <!-- Left Column -->
+        <div class="col-lg-11 col-xl-10">
+            <div class="row g-4">
+                <!-- LEFT COLUMN -->
                 <div class="col-md-6">
-                    <!-- About Me Section -->
-                    <section>
-                        <h2 class="text-secondary fw-bolder mb-4">About Me</h2>
-                        <div class="card overflow-hidden shadow rounded-4 border-0 mb-5 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body p-0">
-                                <div class="d-flex align-items-center">
-                                    <div class="p-5">
-                                        <h3 class="fw-bolder">Bc. Miriam Tomášová</h3>
-                                        <p>
-                                            I am a passionate computer science student specializing in developing innovative solutions to real-world problems.
-                                            My interests include flood management, environmental protection, and software development.
-                                            I have experience in various programming languages and am committed to continuous learning and improvement.
-                                        </p>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                        </div>
-                    </section>
+                    <!-- About -->
+                    <div class="section-label reveal"><i class="bi bi-person-circle"></i> About Me</div>
+                    <div class="resume-card reveal">
+                        <h4 style="font-family:'Syne',sans-serif;color:#f5efe6;" class="text-gradient">Miriam Tomášová</h4>
+                        <p style="color:#888;margin-top:.75rem;font-size:.95rem;">Communicative and adaptable student of Informatics with a logical mindset and creative perspective. I enjoy tackling new challenges, learning continuously, and collaborating in dynamic environments. Motivated by innovation and efficient problem-solving. <strong style="color:#d4a853;">Personality type: ENFJ</strong>.</p>
+                        <div style="font-size:.8rem;color:#555;"><i class="bi bi-geo-alt-fill me-1" style="color:#c0392b;"></i> Slovak | Born 2002</div>
+                    </div>
 
-                    <!-- Education Section -->
-                    <section>
-                        <h2 class="text-secondary fw-bolder mb-4">Education</h2>
-                        <!-- Grammar School -->
-                        <div class="card shadow border-0 rounded-4 mb-5 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body p-5">
-                                <h3 class="text-secondary fw-bolder mb-2">2018 - 2022</h3>
-                                <p><strong>Grammar School Šrobárova</strong><br>Košice, Slovakia<br>High school leaving exam in: Slovak language, English language, Informatics, History of art.</p>
-                            </div>
+                    <!-- Education -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-mortarboard-fill"></i> Education</div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <span class="year-badge">2025 – present</span>
+                            <span class="degree-badge">Master's</span>
                         </div>
-                        <!-- University -->
-                        <div class="card shadow border-0 rounded-4 mb-5 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body p-5">
-                                <h3 class="text-secondary fw-bolder mb-2">2022 - 2025</h3>
-                                <p><strong>Vysoká škola Báňská - Technical University of Ostrava</strong><br>Ostrava, Czech Republic<br>Field of study: Informatics.</p>
-                            </div>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Czech Technical University in Prague</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;"><em>Specialization: Managerial Informatics</em></p>
+                    </div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <span class="year-badge">2022 – 2025</span>
+                            <span class="degree-badge">Bachelor's</span>
                         </div>
-                    </section>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">VSB – Technical University of Ostrava</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">Field: <strong>Informatics</strong> | Ostrava, CZ</p>
+                    </div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+                            <span class="year-badge">2018 – 2022</span>
+                            <span class="degree-badge">High School</span>
+                        </div>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Gymnázium — Košice</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">General secondary with IT focus</p>
+                    </div>
 
-                    <!-- Hobby Section -->
-                    <section>
-                        <h2 class="text-secondary fw-bolder mb-4">Hobby</h2>
-                        <div class="card shadow border-0 rounded-4 mb-4 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body">
-                                <h5 class="card-title text-secondary fw-bold">Interests and Hobbies</h5>
-                                <ul class="mb-0">
-                                    <li>Swimming</li>
-                                    <li>Running</li>
-                                    <li>Playing games</li>
-                                    <li>Listening to and playing music</li>
-                                </ul>
-                            </div>
+                    <!-- Languages -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-translate"></i> Languages</div>
+                    <div class="resume-card reveal">
+                        <div class="lang-row"><span class="lang-level">Native</span><span style="color:#e8e0d5;">Slovak</span></div>
+                        <div class="lang-row"><span class="lang-level">C1/C2</span><span style="color:#e8e0d5;">Czech</span></div>
+                        <div class="lang-row"><span class="lang-level">B2</span><span style="color:#e8e0d5;">English</span></div>
+                        <div class="lang-row"><span class="lang-level">A2</span><span style="color:#e8e0d5;">Spanish</span></div>
+                    </div>
+
+                    <!-- Publications -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-file-text-fill"></i> Publications & Thesis</div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex align-items-baseline gap-2 mb-2">
+                            <span class="degree-badge">2025</span>
+                            <span style="color:#f5efe6;font-weight:700;">Bachelor Thesis</span>
                         </div>
-                    </section>
+                        <p style="color:#d4a853;font-size:.9rem;font-weight:600;margin-bottom:.5rem;">System for Recording Vital Signs and Physical Activities from Wearables</p>
+                        <p style="color:#666;font-size:.85rem;margin:0;">IoT ecosystem for biometric data from wearables — Android app (BLE), local sync &amp; cloud storage for analysis.</p>
+                    </div>
                 </div>
 
-                <!-- Right Column -->
+                <!-- RIGHT COLUMN -->
                 <div class="col-md-6">
-                    <!-- Work Experience Section -->
-                    <section>
-                        <h2 class="text-primary fw-bolder mb-0">Work Experience</h2>
-                        <!-- Red Cross -->
-                        <div class="card shadow border-0 rounded-4 mb-5 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body p-5">
-                                <h3 class="text-secondary fw-bolder mb-2">2021 - Present</h3>
-                                <p><strong>Activity in Red Cross</strong><br>Slovakia<br>Creating posters and announcements for the website, assisting in events.</p>
-                            </div>
+                    <!-- Experience -->
+                    <div class="section-label reveal"><i class="bi bi-briefcase-fill"></i> Experience</div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between flex-wrap gap-2">
+                            <span class="year-badge">2023 - 2025</span>
+                            <span class="degree-badge">Analyst</span>
                         </div>
-                        <!-- PROPLUSCO -->
-                        <div class="card shadow border-0 rounded-4 mb-5 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body p-5">
-                                <h3 class="text-secondary fw-bolder mb-2">2023 - Present</h3>
-                                <p><strong>Surveyor at PROPLUSCO</strong><br>Košice, Slovakia<br>Analytical work in public opinion research.</p>
-                            </div>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Survey Analyst</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">Data collection and analysis of public opinion surveys.</p>
+                    </div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between flex-wrap gap-2">
+                            <span class="year-badge">2024</span>
+                            <span class="degree-badge">Promo</span>
                         </div>
-                    </section>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Project presenter</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">Assistance at the trade fair in presenting third-party technical projects</p>
+                    </div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between flex-wrap gap-2">
+                            <span class="year-badge">2023 - present</span>
+                            <span class="degree-badge">UI / UX </span>
+                        </div>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Frontend Developer</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">Responsive web development, UX collaboration, Bootstrap &amp; vanilla JS.</p>
+                    </div>
 
-                    <!-- Programming Section -->
-                    <section>
-                        <h2 class="text-primary fw-bolder mb-4">Programming</h2>
-                        <div class="card shadow border-0 rounded-4 mb-4 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body">
-                                <h5 class="card-title text-secondary fw-bold">Programming</h5>
-                                <!-- Skills -->
-                                <div class="mb-3"><span class="fw-bold">C, C++:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 65%;"></div></div></div>
-                                <div class="mb-3"><span class="fw-bold">Java:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 80%;"></div></div></div>
-                                <div class="mb-3"><span class="fw-bold">Python:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 70%;"></div></div></div>
-                                <div class="mb-3"><span class="fw-bold">SQL:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 65%;"></div></div></div>
-                                <div class="mb-3"><span class="fw-bold">LaTeX:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 80%;"></div></div></div>
-                                <div class="mb-3"><span class="fw-bold">UML:</span><div class="progress"><div class="progress-bar bg-primary" style="width: 80%;"></div></div></div>
-                            </div>
+                    <!-- Skills -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-cpu"></i> Technical Skills</div>
+                    <div class="resume-card reveal">
+                        <p style="color:#888;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem;">Languages</p>
+                        <div>
+                            <span class="skill-pill">JavaScript</span><span class="skill-pill">Python</span><span class="skill-pill">Java</span><span class="skill-pill">C</span><span class="skill-pill">HTML/CSS</span><span class="skill-pill">SQL</span><span class="skill-pill">MQTT</span>
                         </div>
-                    </section>
+                        <p style="color:#888;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin:1rem 0 .5rem;">Tools &amp; Frameworks</p>
+                        <div>
+                            <span class="skill-pill">JavaFX</span><span class="skill-pill">Bootstrap</span><span class="skill-pill">JDBC</span><span class="skill-pill">Git</span><span class="skill-pill">WebSockets</span><span class="skill-pill">Android</span>
+                        </div>
+                        <p style="color:#888;font-size:.8rem;text-transform:uppercase;letter-spacing:.08em;margin:1rem 0 .5rem;">Other</p>
+                        <div>
+                            <span class="skill-pill">UML / System Design</span><span class="skill-pill">AI &amp; Prompt Eng.</span><span class="skill-pill">Data Visualization</span><span class="skill-pill">Photography</span><span class="skill-pill">Video Editing</span>
+                        </div>
+                    </div>
 
-                    <!-- Skills Section -->
-                    <section>
-                        <h2 class="text-primary fw-bolder mb-4">Skills</h2>
-                        <div class="card shadow border-0 rounded-4 mb-4 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body">
-                                <h5 class="card-title text-secondary fw-bold">Skills</h5>
-                                <div class="d-flex align-items-center mb-3">
-                                    <i class="bi bi-bus-front-fill"></i>
-                                    <span>Driver's License: B</span>
-                                </div>
-                                <div class="d-flex align-items-center">
-                                    <i class="bi text-primary me-2"></i>
-                                    <span>Experience with cameras, audio equipment, and cash register software (GLS)</span>
-                                </div>
-                            </div>
+                    <!-- Core competencies (progress bars) -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-bar-chart-fill"></i> Core Competencies</div>
+                    <div class="resume-card reveal">
+                        <div id="skillBars"></div>
+                    </div>
+
+                    <!-- Volunteer -->
+                    <div class="section-label reveal mt-4"><i class="bi bi-heart-fill"></i> Volunteer</div>
+                    <div class="resume-card reveal">
+                        <div class="d-flex justify-content-between flex-wrap gap-2">
+                            <span class="year-badge">2020 – present</span>
                         </div>
-                    </section>
-                    <!-- Languages Section -->
-                    <section>
-                        <h2 class="text-primary fw-bolder mb-4">Languages</h2>
-                        <div class="card shadow border-0 rounded-4 mb-4 bg-black text-light animate__animated animate__fadeInDown">
-                            <div class="card-body">
-                                <h5 class="card-title text-secondary fw-bold">Languages</h5>
-                                <div class="d-flex align-items-center mb-2"><span class="badge bg-primary me-2">C2</span><span>Slovak (Native)</span></div>
-                                <div class="d-flex align-items-center mb-2"><span class="badge bg-primary me-2">C1</span><span>Czech</span></div>
-                                <div class="d-flex align-items-center mb-2"><span class="badge bg-primary me-2">B2</span><span>English</span></div>
-                                <div class="d-flex align-items-center mb-2"><span class="badge bg-primary me-2">A2</span><span>Spanish</span></div>
-                            </div>
-                        </div>
-                    </section>
+                        <p class="fw-bold mt-2 mb-1" style="color:#f5efe6;">Slovak Red Cross</p>
+                        <p style="color:#888;font-size:.9rem;margin:0;">First aid, emergency response, humanitarian crisis management.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</main>
+<footer class="bg-dark text-light py-4 mt-auto">
+    <div class="container px-5">
+        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
+            <div class="col-auto mb-3 mb-sm-0"><div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div></div>
+            <div class="col-auto"><div class="d-flex gap-3 fs-5">
+                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
+                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
+            </div></div>
+        </div>
+    </div>
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// Skill bars
+const skills=[{n:'Communication & Collaboration',v:95},{n:'AI & Prompt Engineering',v:88},{n:'UML / System Design',v:84},{n:'Data Visualization',v:80},{n:'Python / Java',v:75},{n:'Git / Version Control',v:70}];
+const sb=document.getElementById('skillBars');
+skills.forEach(s=>{
+    const wrap=document.createElement('div');wrap.style.marginBottom='0.75rem';
+    wrap.innerHTML=`<div style="display:flex;justify-content:space-between;font-size:.82rem;margin-bottom:4px;"><span style="color:#e8e0d5;">${s.n}</span><span style="color:#d4a853;">${s.v}%</span></div><div class="progress"><div class="progress-bar" style="width:0%" data-target="${s.v}%"></div></div>`;
+    sb.appendChild(wrap);
+});
+// animate progress bars on scroll
+const obs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){document.querySelectorAll('.progress-bar').forEach(b=>{b.style.transition='width 1s ease';b.style.width=b.dataset.target;});}}),{threshold:.3});
+obs.observe(sb);
 
-        </main>
-            <!-- Footer -->
-            <footer class="bg-dark text-light py-4 mt-auto">
-                <div class="container px-5">
-                    <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-                        <div class="col-auto mb-3 mb-sm-0">
-                            <div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div>
-                        </div>
-                        <div class="col-auto">
-                            <div class="d-flex gap-3 fs-5">
-                                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
-                                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </footer>
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-    </body>
+// Scroll reveal
+const revEls=document.querySelectorAll('.reveal');
+const robs=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');}),{threshold:.1});
+revEls.forEach(el=>robs.observe(el));
+</script>
+</body>
 </html>
