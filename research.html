@@ -53,6 +53,119 @@
             font-size: 1.2rem;
         }
 
+        /* --- NEW ACKNOWLEDGMENTS SECTION STYLES --- */
+        .acknowledge-section {
+            background: linear-gradient(145deg, #0e0e0e 0%, #141414 100%);
+            border-radius: 28px;
+            border: 1px solid rgba(212, 168, 83, 0.25);
+            padding: 2rem 2rem 2rem 2rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 25px -12px rgba(0,0,0,0.6);
+        }
+        .acknowledge-section:hover {
+            border-color: rgba(192, 57, 43, 0.5);
+            box-shadow: 0 18px 30px -12px rgba(192,57,43,0.2);
+        }
+        .ack-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+            border-bottom: 2px dashed #2a2a2a;
+            padding-bottom: 0.75rem;
+        }
+        .ack-icon {
+            background: #c0392b20;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 60px;
+            font-size: 1.8rem;
+            color: #d4a853;
+        }
+        .ack-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.9rem;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #f5efe6 0%, #d4a853 80%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+        .ack-sub {
+            color: #9a9a9a;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            max-width: 85%;
+        }
+        .friends-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin: 1.8rem 0 1rem 0;
+        }
+        .friend-card-placeholder {
+            background: #1c1c1c;
+            border-radius: 60px;
+            padding: 0.6rem 1.4rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid #2f2f2f;
+            transition: all 0.2s;
+            font-weight: 500;
+            color: #ddd;
+            backdrop-filter: blur(2px);
+        }
+        .friend-card-placeholder i {
+            color: #d4a853;
+            font-size: 1rem;
+        }
+        .friend-card-placeholder:hover {
+            background: #2a2a2a;
+            border-color: #c0392b;
+            transform: translateY(-3px);
+            color: #f5efe6;
+        }
+        .inline-note {
+            background: #0b0b0b;
+            border-left: 4px solid #c0392b;
+            padding: 0.9rem 1.2rem;
+            border-radius: 16px;
+            margin-top: 1.5rem;
+            font-size: 0.85rem;
+            color: #aaa;
+            font-family: monospace;
+        }
+        .inline-note i {
+            color: #d4a853;
+            margin-right: 6px;
+        }
+        .btn-ghost-sm {
+            background: transparent;
+            border: 1px solid #3a3a3a;
+            border-radius: 40px;
+            padding: 0.25rem 1rem;
+            font-size: 0.7rem;
+            color: #bcbcbc;
+            transition: all 0.2s;
+            margin-left: 12px;
+            cursor: pointer;
+        }
+        .btn-ghost-sm:hover {
+            border-color: #c0392b;
+            color: #d4a853;
+        }
+        @media (max-width: 550px) {
+            .ack-title { font-size: 1.5rem; }
+            .friends-grid { gap: 0.7rem; }
+            .friend-card-placeholder { padding: 0.4rem 1rem; font-size: 0.85rem; }
+            .acknowledge-section { padding: 1.5rem; }
+        }
     </style>
 </head>
 <body class="d-flex flex-column h-100">
@@ -148,7 +261,6 @@
                 <button class="btn-fun" id="bigResearchLink"><i class="bi bi-journal-text me-2"></i>Read Full Abstract</button>
             </div>
         </div>
-
         <!-- About card -->
         <div class="card-research p-4 p-md-5 mb-5 reveal">
             <div class="row align-items-center">
@@ -164,6 +276,61 @@
                 </div>
             </div>
         </div>
+
+
+        <!-- ========================================== -->
+        <!-- NEW ACKNOWLEDGMENTS SECTION (kamaráti, testovanie, názory) -->
+        <!-- ========================================== -->
+        <div class="reveal mb-5" id="acknowledgmentBlock">
+            <div class="acknowledge-section">
+                <div class="ack-header">
+                    <div class="ack-icon"><i class="bi bi-hearts"></i></div>
+                    <div class="ack-title">Thanks to my crew ✨</div>
+
+                </div>
+                <div class="ack-sub">
+                    ⚡ Without your help, this research would not exist. You tested prototypes, shared brutal honest opinions, kept me sane — and reminded me that no algorithm beats real friendship.
+                </div>
+
+                <!-- DYNAMIC FRIENDS LIST: tu priamo doplníte mená / nicky / alebo necháte placeholder-y -->
+                <div class="friends-grid" id="friendsListContainer">
+
+                    <div class="friend-card-placeholder"><i class="bi bi-person-check-fill"></i> <span class="friend-name">Lucia J.</span></div>
+                    <a href="https://homel.vsb.cz/~hor0551/" class="friend-link" style="text-decoration: none;"><div class="friend-card-placeholder"><i class="bi bi-person-check-fill"  ></i> <span class="friend-name">Lukáš H. </span></div> </a>
+                    <div class="friend-card-placeholder"><i class="bi bi-person-check-fill"></i> <span class="friend-name">Barbora P.</span></div>
+                    <div class="friend-card-placeholder"><i class="bi bi-person-check-fill"></i> <span class="friend-name">Dominika G.</span></div>
+                    <div class="friend-card-placeholder"><i class="bi bi-person-check-fill"></i> <span class="friend-name"> Zuzka B. </span></div>
+                    <!-- === SEM DOPLŇTE VAŠICH KAMARÁTOV / TESTOVACOV === -->
+                    <!-- Príklad: <div class="friend-card-placeholder"><i class="bi bi-person-check-fill"></i> <span class="friend-name">Meno Priezvisko</span></div> -->
+                </div>
+
+                <!-- Doplnkové info o tom, čo konkrétne spravili - názory, testovanie, feedback -->
+                <div style="margin-top: 1rem;">
+                    <div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: flex-start;">
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-bug-fill me-1" style="color:#d4a853;"></i> early testing</span>
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-chat-dots-fill me-1" style="color:#d4a853;"></i> constructive feedback</span>
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-graph-up me-1" style="color:#d4a853;"></i> fresh perspectives</span>
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-pc-display me-1" style="color:#d4a853;"></i> IT Testers</span>
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-camera me-1" style="color:#d4a853;"></i> Design Tester</span>
+                        <span style="background:#1f1f1f; border-radius: 30px; padding: 6px 16px; font-size: 0.75rem; color:#bbb;"><i class="bi bi-clipboard2-check-fill me-1" style="color:#d4a853;"></i> Psychological counselor</span>
+
+                    </div>
+                </div>
+
+                <!-- Detailná veta s miestom na vlastné slová (voliteľné) -->
+                <div class="inline-note">
+                    <i class="bi bi-pencil-square"></i>
+                    <strong>✏️ Poznámka pod čiarou:</strong><br>
+                    🫶 Štatisticky vzaté, pravdepodobnosť, že by som toto dokončila bez vašej pomoci, sa blížila k nule. Ďakujem za každý jeden 'user error', ktorý ste nahlásili, a za každú povzbudivú správu, ktorá ma zachránila pred vyhorením. Validovali ste nielen môj výskum, ale aj moju príčetnosť. — Miriam
+                </div>
+                <div class="text-end mt-2" style="font-size:0.7rem; color:#6c6c6c;">
+                    <i class="bi bi-arrow-repeat"></i> #communityPowered
+                </div>
+            </div>
+        </div>
+        <!-- ========== END OF ACKNOWLEDGMENTS SECTION ========== -->
+
+
     </div>
 </main>
 
@@ -227,84 +394,59 @@
         canvas.width = 200;
         canvas.height = 200;
 
-        // Load the image
         const amongImg = new Image();
-        amongImg.src = 'assets/among.png'; // Make sure the file path is correct
+        amongImg.src = 'assets/among.png';
         let imgLoaded = false;
-
-        amongImg.onload = function() {
-            imgLoaded = true;
-            animate(); // Start animation only after image loads
-        };
-
+        amongImg.onload = function() { imgLoaded = true; animate(); };
         let posX = 70, posY = 70;
         let targetX = 70, targetY = 70;
         let frame = 0;
-
         function drawAmong(x, y) {
             ctx.clearRect(0, 0, 200, 200);
-            if (imgLoaded) {
-                ctx.save();
-                // Draw image at position
-                ctx.drawImage(amongImg, x - 30, y - 30, 60, 60);
-                ctx.restore();
-            }
+            if (imgLoaded) { ctx.drawImage(amongImg, x - 30, y - 30, 60, 60); }
         }
-
         function animate() {
             frame++;
-
-            if (frame % 40 === 0) {
-                targetX = 35 + Math.random() * 100;
-                targetY = 40 + Math.random() * 90;
-            }
-
+            if (frame % 40 === 0) { targetX = 35 + Math.random() * 100; targetY = 40 + Math.random() * 90; }
             posX += (targetX - posX) * 0.08;
             posY += (targetY - posY) * 0.08;
-
             posX = Math.min(165, Math.max(25, posX));
             posY = Math.min(160, Math.max(30, posY));
-
             drawAmong(posX, posY);
-
             requestAnimationFrame(animate);
         }
-
-        // Only start animation if image is already loaded
-        if (imgLoaded) {
-            animate();
-        }
-
-        // Open link when clicked
-        canvas.addEventListener('click', () => {
-            window.open('https://among-ai-bd510.web.app/', '_blank'); // Change to your desired URL
-            // Or use: window.location.href = 'https://example.com'; for same tab
-        });
-
-        // Optional: change tip text on click
+        if (imgLoaded) animate();
+        canvas.addEventListener('click', () => { window.open('https://among-ai-bd510.web.app/', '_blank'); });
         canvas.addEventListener('click', () => {
             document.getElementById('amongTip').textContent = '🧠 impostor syndrome? But you\'re doing great!';
-            setTimeout(() => {
-                document.getElementById('amongTip').textContent = '✨ sus? 👀 click me!';
-            }, 2000);
+            setTimeout(() => { document.getElementById('amongTip').textContent = '✨ sus? 👀 click me!'; }, 2000);
         });
     })();
 
-    // Modal
+    // Modal logic
     document.getElementById('bigResearchLink').addEventListener('click',e=>{e.preventDefault();new bootstrap.Modal(document.getElementById('researchModal')).show();});
     document.getElementById('fakeCite')?.addEventListener('click',e=>{e.preventDefault();alert('BibTeX copied! (just kidding — but reach out for real citation 🎓)');});
 
     // Scroll reveal
-    const revEls=document.querySelectorAll('.reveal');
-    // Scroll reveal - fixed version
     const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-            }
-        });
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
     }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));</script>
+    // Small helper: toggle hint about editing friend names
+    const toggleBtn = document.getElementById('toggleAckEditHint');
+    if(toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            const noteBlock = document.querySelector('.inline-note');
+            if(noteBlock) {
+                noteBlock.style.transition = 'all 0.2s';
+                noteBlock.style.backgroundColor = '#1c1c1c';
+                noteBlock.style.borderLeftColor = '#d4a853';
+                setTimeout(() => { noteBlock.style.backgroundColor = ''; noteBlock.style.borderLeftColor = ''; }, 700);
+            }
+            alert("💡 Tip: Priamo v HTML kóde nájdi sekciu s id='friendsListContainer'. Každý kamarát je v <div class='friend-card-placeholder'>. Stačí prepísať text vo vnútri <span class='friend-name'>. Môžeš pridať aj ďalšie riadky kópiou bloku. Potom ulož a hotovo! 🎉");
+        });
+    }
+</script>
 </body>
 </html>
