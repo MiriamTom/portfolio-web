@@ -12115,6 +12115,7 @@ h1, h2, h3, .display-3, .display-5 {
   background: var(--mt-card) !important;
   border: 1px solid var(--mt-border) !important;
   border-radius: 1.5rem !important;
+  margin-top: 2rem;
   transition: border-color 0.25s, box-shadow 0.25s;
 }
 

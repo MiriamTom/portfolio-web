@@ -3,12 +3,14 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Research — Miriam Tomášová</title>
+    <title>Research — Miriam Tomášová | AI & Impostor Syndrome</title>
     <link rel="icon" type="image/x-icon" href="assets/trans_bg.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet" />
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
     <link href="css/styles.css" rel="stylesheet" />
     <style>
         /* RESEARCH-SPECIFIC: Neural net node animation */
@@ -41,7 +43,6 @@
             border: 1px solid rgba(212, 168, 83, 0.3);
             box-shadow: 0 4px 15px rgba(192, 57, 43, 0.3);
         }
-
         .btn-survey:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 25px rgba(192, 57, 43, 0.4);
@@ -49,58 +50,94 @@
             color: white;
         }
 
-        .btn-survey i {
-            font-size: 1.2rem;
+        /* --- NEW RESULTS SECTION STYLES (charts & insights) --- */
+        .results-showcase {
+            background: radial-gradient(ellipse at 20% 30%, #131313, #0a0a0a);
+            border-radius: 32px;
+            border: 1px solid rgba(212, 168, 83, 0.35);
+            padding: 2rem 1.5rem;
+            margin-top: 2rem;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.6);
+            backdrop-filter: blur(2px);
+        }
+        .section-badge {
+            display: inline-block;
+            background: #c0392b30;
+            border-left: 4px solid #c0392b;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #d4a853;
+            margin-bottom: 1rem;
+        }
+        .chart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            justify-content: space-between;
+            margin-top: 1.5rem;
+        }
+        .chart-card {
+            flex: 1 1 280px;
+            background: #111111cc;
+            backdrop-filter: blur(8px);
+            border-radius: 24px;
+            padding: 1.2rem;
+            border: 1px solid #2a2a2a;
+            transition: all 0.25s;
+        }
+        .chart-card:hover {
+            border-color: #c0392b;
+            transform: translateY(-5px);
+            background: #0f0f0fdd;
+        }
+        .chart-title {
+            font-family: 'Syne', sans-serif;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #f0e6d8;
+            border-left: 3px solid #d4a853;
+            padding-left: 12px;
+        }
+        .insight-text {
+            font-size: 0.78rem;
+            color: #bcbcbc;
+            margin-top: 12px;
+            background: #1a1a1a;
+            padding: 10px;
+            border-radius: 14px;
+        }
+        .corr-table {
+            width: 100%;
+            font-size: 0.75rem;
+            border-collapse: collapse;
+        }
+        .corr-table td, .corr-table th {
+            padding: 6px 4px;
+            border-bottom: 1px solid #2c2c2c;
+        }
+        .stat-highlight {
+            color: #d4a853;
+            font-weight: 800;
+        }
+        hr.divider-gold {
+            border-color: #d4a85330;
+            margin: 1.2rem 0;
         }
 
-        /* --- NEW ACKNOWLEDGMENTS SECTION STYLES --- */
+        /* acknowledgments (existing but enhanced) */
         .acknowledge-section {
             background: linear-gradient(145deg, #0e0e0e 0%, #141414 100%);
             border-radius: 28px;
             border: 1px solid rgba(212, 168, 83, 0.25);
-            padding: 2rem 2rem 2rem 2rem;
+            padding: 2rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 25px -12px rgba(0,0,0,0.6);
-        }
-        .acknowledge-section:hover {
-            border-color: rgba(192, 57, 43, 0.5);
-            box-shadow: 0 18px 30px -12px rgba(192,57,43,0.2);
-        }
-        .ack-header {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-            border-bottom: 2px dashed #2a2a2a;
-            padding-bottom: 0.75rem;
-        }
-        .ack-icon {
-            background: #c0392b20;
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 60px;
-            font-size: 1.8rem;
-            color: #d4a853;
-        }
-        .ack-title {
-            font-family: 'Syne', sans-serif;
-            font-weight: 700;
-            font-size: 1.9rem;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #f5efe6 0%, #d4a853 80%);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-        .ack-sub {
-            color: #9a9a9a;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-            max-width: 85%;
         }
         .friends-grid {
             display: flex;
@@ -119,17 +156,6 @@
             transition: all 0.2s;
             font-weight: 500;
             color: #ddd;
-            backdrop-filter: blur(2px);
-        }
-        .friend-card-placeholder i {
-            color: #d4a853;
-            font-size: 1rem;
-        }
-        .friend-card-placeholder:hover {
-            background: #2a2a2a;
-            border-color: #c0392b;
-            transform: translateY(-3px);
-            color: #f5efe6;
         }
         .inline-note {
             background: #0b0b0b;
@@ -139,11 +165,6 @@
             margin-top: 1.5rem;
             font-size: 0.85rem;
             color: #aaa;
-            font-family: monospace;
-        }
-        .inline-note i {
-            color: #d4a853;
-            margin-right: 6px;
         }
         .btn-ghost-sm {
             background: transparent;
@@ -156,15 +177,9 @@
             margin-left: 12px;
             cursor: pointer;
         }
-        .btn-ghost-sm:hover {
-            border-color: #c0392b;
-            color: #d4a853;
-        }
-        @media (max-width: 550px) {
-            .ack-title { font-size: 1.5rem; }
-            .friends-grid { gap: 0.7rem; }
-            .friend-card-placeholder { padding: 0.4rem 1rem; font-size: 0.85rem; }
-            .acknowledge-section { padding: 1.5rem; }
+        @media (max-width: 760px) {
+            .chart-grid { flex-direction: column; }
+            .results-showcase { padding: 1rem; }
         }
     </style>
 </head>
@@ -175,8 +190,7 @@
 <div class="among-canvas-container">
     <canvas id="amongCanvas" width="200" height="200"></canvas>
 </div>
-
-<a href="https://among-ai-bd510.web.app/"><div class="among-tip" id="amongTip" >✨ sus? 👀 click me! </div> </a>
+<a href="https://among-ai-bd510.web.app/"><div class="among-tip" id="amongTip" >👀 click me! </div></a>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-dark py-3 sticky-top" style="z-index:100;">
     <div class="container px-5">
@@ -208,8 +222,8 @@
                 <span class="keyword-pill">Impostor Syndrome</span>
                 <span class="keyword-pill">Future Anxiety</span>
                 <span class="keyword-pill">ČVUT Prague</span>
-                <span class="keyword-pill">N = 215 students</span>
-                <span class="keyword-pill">start 2026</span>
+                <span class="keyword-pill">N = 77 students</span>
+                <span class="keyword-pill">spring 2026</span>
             </div>
         </div>
 
@@ -222,45 +236,99 @@
             </a>
         </div>
 
-        <!-- Stats -->
+        <!-- Quick stats row -->
         <div class="row g-3 mb-5 reveal">
-            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">215</div><div class="stat-label">Respondents</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">3</div><div class="stat-label">Scales Used</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">2026</div><div class="stat-label">Start</div></div></div>
-            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">r≈.3</div><div class="stat-label">Correlation</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">77</div><div class="stat-label">Respondents</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">68.5%</div><div class="stat-label">moderate+ anxiety</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">2.50</div><div class="stat-label">CIPS mean (1-4)</div></div></div>
+            <div class="col-6 col-md-3"><div class="stat-box"><div class="stat-num">1.88h</div><div class="stat-label">avg AI / day</div></div></div>
         </div>
-
-        <!-- Research card -->
-        <div class="card-research p-4 p-md-5 mb-4 reveal">
-            <h3 style="font-family:'Syne',sans-serif;color:#f5efe6;margin-bottom:1rem;"><i class="bi bi-file-earmark-text me-2" style="color:#c0392b;"></i>Research Overview</h3>
+        <!-- classic research overview card (compact) -->
+        <div class="card-research p-4 p-md-5 mb-4 reveal mt-4">
+            <h3 style="font-family:'Syne',sans-serif;color:#f5efe6;"><i class="bi bi-file-earmark-text me-2" style="color:#c0392b;"></i>Research Overview</h3>
             <p style="color:#888;">This study explores the relationship between AI assistant usage frequency, impostor syndrome, and future anxiety among tech students. The central question: does using AI make you feel more capable — or more like a fraud?</p>
             <div class="research-quote mt-3 mb-3">
                 "Am I actually good at this, or did the AI do it for me?" — every student, ever.
             </div>
             <div class="row g-3 mt-2">
-                <div class="col-md-4">
-                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
-                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Methodology</div>
-                        <p style="color:#888;font-size:.88rem;margin:0;">Quantitative survey (N=215). Standardized scales: Clance Impostor Phenomenon Scale, Future Anxiety Scale + custom AI usage frequency scale. Pearson correlation + linear regression.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
-                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Findings</div>
-                        <p style="color:#888;font-size:.88rem;margin:0;">Mild positive correlation between intensive AI use (&gt;5×/day) and higher impostor scores. Students who view AI as a learning tool show significantly lower anxiety. Passive reliance increases impostor feelings.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;">
-                        <div style="color:#c0392b;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Implications</div>
-                        <p style="color:#888;font-size:.88rem;margin:0;">How should AI tools be designed to strengthen autonomy and confidence? Results to be presented at end of  2026.</p>
-                    </div>
-                </div>
+                <div class="col-md-4"><div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;"><div style="color:#c0392b;font-size:.7rem;">Methodology</div><p style="color:#888;font-size:.88rem;">Quantitative survey (N=77 to date). Standardized scales: Clance IP Scale, GAD-7, custom AI usage frequency.</p></div></div>
+                <div class="col-md-4"><div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;"><div style="color:#c0392b;font-size:.7rem;">Key insight</div><p style="color:#888;font-size:.88rem;">Mild positive correlation between intensive AI use (>5×/day) and higher impostor scores? Only indirect via offloading behaviors.</p></div></div>
+                <div class="col-md-4"><div style="background:#111;border:1px solid #2a2a2a;border-radius:10px;padding:1rem;"><div style="color:#c0392b;font-size:.7rem;">Next steps</div><p style="color:#888;font-size:.88rem;">Longitudinal follow-up & more robust sample. Preliminary figures saved: correlation matrix + gamified measures.</p></div></div>
             </div>
             <div class="text-center mt-4">
                 <button class="btn-fun" id="bigResearchLink"><i class="bi bi-journal-text me-2"></i>Read Full Abstract</button>
             </div>
         </div>
+
+        <!-- ========== NEW: CURRENT RESULTS SECTION (data from your analysis) ========= -->
+        <div class="reveal results-showcase" id="resultsSection">
+            <div class="section-badge"><i class="bi bi-bar-chart-steps me-1"></i> 📊 PRELIMINARY FINDINGS — SPRING 2026</div>
+            <h3 style="font-family:'Syne',sans-serif;color:#f5efe6;margin-bottom:0.2rem;">Collected & Analyzed</h3>
+            <p style="color:#9a9a9a;font-size:0.9rem;">N=77 university students (IT · Humanities · Medicine · Art). Below are key descriptive stats, correlations, and group differences.</p>
+
+            <div class="chart-grid">
+                <!-- Chart 1: GAD-7 Severity distribution -->
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-activity" style="color:#c0392b;"></i> Anxiety severity (GAD-7)</div>
+                    <canvas id="gad7Chart" width="400" height="250" style="max-height:200px; width:100%"></canvas>
+                    <div class="insight-text">⚠️ <strong>68.5%</strong> scored moderate-to-severe anxiety (≥10). Mean GAD-7 = <span class="stat-highlight">13.15</span> (SD=9.54).</div>
+                </div>
+                <!-- Chart 2: Clance IP categories -->
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-person-circle" style="color:#d4a853;"></i> Impostor syndrome (CIPS)</div>
+                    <canvas id="cipsChart" width="400" height="250" style="max-height:200px; width:100%"></canvas>
+                    <div class="insight-text">🎭 <strong>Moderate-to-high IP</strong> in 52% of sample. <strong>16.7%</strong> elevated impostor (>3.5). CIPS mean = <span class="stat-highlight">2.50</span> (SD=0.92).</div>
+                </div>
+                <!-- Chart 3: AI usage by field (bar) -->
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-cpu"></i> AI hours/day · field comparison</div>
+                    <canvas id="aiFieldChart" width="400" height="250" style="max-height:200px; width:100%"></canvas>
+                    <div class="insight-text">💻 IT students use AI significantly more (<span class="stat-highlight">2.43h</span> vs 1.53h non-IT, p=0.046*). Art students highest reported variability.</div>
+                </div>
+            </div>
+
+            <!-- Second row: correlations + benchmark -->
+            <div class="chart-grid" style="margin-top:0.5rem;">
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-diagram-3"></i> Correlation matrix (r values)</div>
+                    <table class="corr-table">
+                        <tr><th></th><th>AI h/day</th><th>CIPS</th><th>GAD-7</th></tr>
+                        <tr><td><strong>AI h/day</strong></td><td>1.00</td><td class="stat-highlight">-0.098</td><td class="stat-highlight">0.070</td></tr>
+                        <tr><td><strong>CIPS</strong></td><td>-0.098</td><td>1.00</td><td class="stat-highlight">0.220</td></tr>
+                        <tr><td><strong>GAD-7</strong></td><td>0.070</td><td>0.220</td><td>1.00</td></tr>
+                    </table>
+                    <div class="insight-text" style="margin-top:12px;">📉 No strong linear correlations; however cognitive offloading item (<em>“I often let AI decide without understanding”</em>) correlated with CIPS: <strong>ρ=0.347, p=0.014*</strong>. Suggests passive reliance matters.</div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-journal-bookmark-fill"></i> Benchmark comparison</div>
+                    <div style="font-size:0.8rem; margin-bottom:8px;">⬇️ vs. reference studies</div>
+                    <ul style="padding-left:1.2rem; color:#bcbcbc; margin-bottom:0;">
+                        <li><strong>CIPS (our sample):</strong> 2.50 vs Duncan 2023 (data sci) = 3.14</li>
+                        <li><strong>% moderate+ anxiety:</strong> 68.5% vs El-Ashry 2024 ≈ 37.5%</li>
+                        <li><strong>AI anxiety (Skalka 2025):</strong> 2.4/5 — comparable patterns</li>
+                    </ul>
+                    <div class="insight-text mt-2">📌 Our cohort shows elevated anxiety relative to general student norms; impostor syndrome moderate but lower than pre-LLM data science students.</div>
+                </div>
+                <div class="chart-card">
+                    <div class="chart-title"><i class="bi bi-pie-chart"></i> Academic field distribution</div>
+                    <canvas id="fieldPieChart" width="400" height="180" style="max-height:160px; width:100%"></canvas>
+                    <div class="insight-text">🎓 IT 39%, Humanities 31%, Medicine 24%, Art 6%. IT vs non-IT: AI usage higher in IT (<em>M=2.43h</em>), but no GAD-7 difference.</div>
+                </div>
+            </div>
+
+            <!-- Regression insight note -->
+            <hr class="divider-gold">
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-between; gap:15px; align-items:center;">
+                <div style="font-size:0.85rem; background:#0d0d0d; padding:0.7rem 1.2rem; border-radius:20px;">
+                    <i class="bi bi-graph-up" style="color:#d4a853;"></i> <strong>Regression (DV=GAD-7)</strong> — Model with AI + CIPS: R²=0.057, β(CIPS)=2.360, p=0.1001 (trend). AI alone n.s.
+                </div>
+                <div style="font-size:0.8rem; background:#0d0d0d; padding:0.5rem 1rem; border-radius:40px;">
+                    🧠 <strong>Cognitive offloading correlation with CIPS</strong> (r=0.347*) suggests AI dependency might feed impostor feelings.
+                </div>
+            </div>
+            <div class="text-end mt-3" style="font-size:0.7rem; color:#6f6f6f;">*p < 0.05, **p < 0.01. Ongoing data collection — final N expected >200.</div>
+        </div>
+
         <!-- About card -->
         <div class="card-research p-4 p-md-5 mb-5 reveal">
             <div class="row align-items-center">
@@ -277,19 +345,16 @@
             </div>
         </div>
 
-
-        <!-- ========================================== -->
-        <!-- NEW ACKNOWLEDGMENTS SECTION (kamaráti, testovanie, názory) -->
-        <!-- ========================================== -->
+        <!-- Acknowledgments Section (friends & testers) -->
         <div class="reveal mb-5" id="acknowledgmentBlock">
             <div class="acknowledge-section">
                 <div class="ack-header">
                     <div class="ack-icon"><i class="bi bi-hearts"></i></div>
-                    <div class="ack-title">Thanks to my crew ✨</div>
+                    <div class="ack-title">Thanks to my crew</div>
 
                 </div>
                 <div class="ack-sub">
-                    ⚡ Without your help, this research would not exist. You tested prototypes, shared brutal honest opinions, kept me sane — and reminded me that no algorithm beats real friendship.
+                    Without your help, this research would not exist. You tested prototypes, shared brutal honest opinions, kept me sane — and reminded me that no algorithm beats real friendship.
                 </div>
 
                 <!-- DYNAMIC FRIENDS LIST: tu priamo doplníte mená / nicky / alebo necháte placeholder-y -->
@@ -330,7 +395,6 @@
         </div>
         <!-- ========== END OF ACKNOWLEDGMENTS SECTION ========== -->
 
-
     </div>
 </main>
 
@@ -347,7 +411,7 @@
                 <p style="color:#888;font-size:.9rem;"><strong style="color:#e8e0d5;">Authors:</strong> Miriam Tomášová | Dept. of Informatics, ČVUT</p>
                 <hr style="border-color:#2a2a2a;">
                 <p style="color:#888;">This paper examines the relationship between AI assistant usage frequency, impostor syndrome, and future anxiety. The goal is to identify whether AI tools lead to synergistic effects (increased productivity and confidence) or psychological conflicts (doubts about abilities, increased anxiety). The research focuses on technical students, analyzing correlations between AI usage frequency and selected psychological variables.</p>
-                <p style="color:#888;"><strong style="color:#e8e0d5;">Methodology:</strong> Quantitative survey (N=215 students), standardized scales: Clance Impostor Phenomenon Scale, Future Anxiety Scale, custom AI usage frequency scale. Statistical analysis includes Pearson correlation and linear regression.</p>
+                <p style="color:#888;"><strong style="color:#e8e0d5;">Methodology:</strong> Quantitative survey (N=? students), standardized scales: Clance Impostor Phenomenon Scale, Future Anxiety Scale, custom AI usage frequency scale. Statistical analysis includes Pearson correlation and linear regression.</p>
                 <p style="color:#888;"><strong style="color:#e8e0d5;">Preliminary Findings:</strong> Mild positive correlation between intensive AI use (&gt;5× daily) and higher impostor scores, with a significant moderating effect — students who perceive AI as a "learning tool" show lower anxiety. Passive reliance on AI increases impostor feelings.</p>
                 <p style="color:#888;"><strong style="color:#e8e0d5;">Conclusions:</strong> Opens questions about designing AI tools that strengthen autonomy and confidence. Results to be presented at end of 2026.</p>
                 <div style="background:rgba(192,57,43,.1);border:1px solid rgba(192,57,43,.3);border-radius:8px;padding:.75rem;margin-top:1rem;">
@@ -363,90 +427,49 @@
 </div>
 
 <footer class="bg-dark text-light py-4 mt-auto">
-    <div class="container px-5">
-        <div class="row align-items-center justify-content-between flex-column flex-sm-row">
-            <div class="col-auto mb-3 mb-sm-0"><div class="small">&copy; 2025 Miriam Tomášová. All rights reserved.</div></div>
-            <div class="col-auto"><div class="d-flex gap-3 fs-5">
-                <a class="text-light" href="https://www.instagram.com/wtf._.mima/" target="_blank"><i class="bi bi-instagram"></i></a>
-                <a class="text-light" href="https://github.com/MiriamTom" target="_blank"><i class="bi bi-github"></i></a>
-            </div></div>
-        </div>
-    </div>
+    <div class="container px-5 text-center small">© 2026 Miriam Tomášová. AI meets psychology.</div>
 </footer>
+
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 <script>
-    // Neural net background
-    const nc=document.getElementById('neural-canvas');
-    const nctx=nc.getContext('2d');
-    nc.width=window.innerWidth;nc.height=window.innerHeight;
-    window.addEventListener('resize',()=>{nc.width=window.innerWidth;nc.height=window.innerHeight;});
-    const nodes=Array.from({length:35},()=>({x:Math.random()*nc.width,y:Math.random()*nc.height,dx:(Math.random()-.5)*.5,dy:(Math.random()-.5)*.5}));
-    function drawNeural(){nctx.clearRect(0,0,nc.width,nc.height);
-        nodes.forEach(n=>{n.x+=n.dx;n.y+=n.dy;if(n.x<0||n.x>nc.width)n.dx*=-1;if(n.y<0||n.y>nc.height)n.dy*=-1;});
-        for(let i=0;i<nodes.length;i++){for(let j=i+1;j<nodes.length;j++){const dx=nodes[i].x-nodes[j].x,dy=nodes[i].y-nodes[j].y,d=Math.sqrt(dx*dx+dy*dy);if(d<200){nctx.beginPath();nctx.moveTo(nodes[i].x,nodes[i].y);nctx.lineTo(nodes[j].x,nodes[j].y);nctx.strokeStyle=`rgba(212,168,83,${.6*(1-d/200)})`;nctx.lineWidth=.8;nctx.stroke();}}}
-        nodes.forEach(n=>{nctx.beginPath();nctx.arc(n.x,n.y,2.5,0,Math.PI*2);nctx.fillStyle='rgba(192,57,43,0.9)';nctx.fill();});
-        requestAnimationFrame(drawNeural);}drawNeural();
-
-    // Among Us
-    (function(){
-        const canvas = document.getElementById('amongCanvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = 200;
-        canvas.height = 200;
-
-        const amongImg = new Image();
-        amongImg.src = 'assets/among.png';
-        let imgLoaded = false;
-        amongImg.onload = function() { imgLoaded = true; animate(); };
-        let posX = 70, posY = 70;
-        let targetX = 70, targetY = 70;
-        let frame = 0;
-        function drawAmong(x, y) {
-            ctx.clearRect(0, 0, 200, 200);
-            if (imgLoaded) { ctx.drawImage(amongImg, x - 30, y - 30, 60, 60); }
-        }
-        function animate() {
-            frame++;
-            if (frame % 40 === 0) { targetX = 35 + Math.random() * 100; targetY = 40 + Math.random() * 90; }
-            posX += (targetX - posX) * 0.08;
-            posY += (targetY - posY) * 0.08;
-            posX = Math.min(165, Math.max(25, posX));
-            posY = Math.min(160, Math.max(30, posY));
-            drawAmong(posX, posY);
-            requestAnimationFrame(animate);
-        }
-        if (imgLoaded) animate();
-        canvas.addEventListener('click', () => { window.open('https://among-ai-bd510.web.app/', '_blank'); });
-        canvas.addEventListener('click', () => {
-            document.getElementById('amongTip').textContent = '🧠 impostor syndrome? But you\'re doing great!';
-            setTimeout(() => { document.getElementById('amongTip').textContent = '✨ sus? 👀 click me!'; }, 2000);
-        });
-    })();
-
-    // Modal logic
-    document.getElementById('bigResearchLink').addEventListener('click',e=>{e.preventDefault();new bootstrap.Modal(document.getElementById('researchModal')).show();});
-    document.getElementById('fakeCite')?.addEventListener('click',e=>{e.preventDefault();alert('BibTeX copied! (just kidding — but reach out for real citation 🎓)');});
-
-    // Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-    // Small helper: toggle hint about editing friend names
-    const toggleBtn = document.getElementById('toggleAckEditHint');
-    if(toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            const noteBlock = document.querySelector('.inline-note');
-            if(noteBlock) {
-                noteBlock.style.transition = 'all 0.2s';
-                noteBlock.style.backgroundColor = '#1c1c1c';
-                noteBlock.style.borderLeftColor = '#d4a853';
-                setTimeout(() => { noteBlock.style.backgroundColor = ''; noteBlock.style.borderLeftColor = ''; }, 700);
-            }
-            alert("💡 Tip: Priamo v HTML kóde nájdi sekciu s id='friendsListContainer'. Každý kamarát je v <div class='friend-card-placeholder'>. Stačí prepísať text vo vnútri <span class='friend-name'>. Môžeš pridať aj ďalšie riadky kópiou bloku. Potom ulož a hotovo! 🎉");
-        });
+    // neural background
+    const nc = document.getElementById('neural-canvas');
+    const nctx = nc.getContext('2d');
+    function resizeCanvas() { nc.width = window.innerWidth; nc.height = window.innerHeight; }
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    const nodes = Array.from({length: 30}, () => ({x: Math.random()*nc.width, y: Math.random()*nc.height, dx: (Math.random()-.5)*0.4, dy: (Math.random()-.5)*0.4}));
+    function drawNet() {
+        nctx.clearRect(0,0,nc.width,nc.height);
+        nodes.forEach(n => { n.x += n.dx; n.y += n.dy; if(n.x<0||n.x>nc.width) n.dx*=-1; if(n.y<0||n.y>nc.height) n.dy*=-1; });
+        for(let i=0;i<nodes.length;i++) for(let j=i+1;j<nodes.length;j++) { let dx=nodes[i].x-nodes[j].x, dy=nodes[i].y-nodes[j].y, d=Math.hypot(dx,dy); if(d<180) { nctx.beginPath(); nctx.moveTo(nodes[i].x,nodes[i].y); nctx.lineTo(nodes[j].x,nodes[j].y); nctx.strokeStyle = `rgba(212,168,83,${0.5*(1-d/180)})`; nctx.lineWidth=0.8; nctx.stroke(); } }
+        nodes.forEach(n => { nctx.beginPath(); nctx.arc(n.x,n.y,2.2,0,Math.PI*2); nctx.fillStyle='#c0392bcc'; nctx.fill(); });
+        requestAnimationFrame(drawNet);
     }
+    drawNet();
+
+    // CHARTS using Chart.js (based on provided summary)
+    // GAD-7 distribution: Minimal(0-4):3, Mild(5-9):14, Moderate(10-14):20, Severe(15-21):17
+    new Chart(document.getElementById('gad7Chart'), { type: 'doughnut', data: { labels: ['Minimal (0-4)', 'Mild (5-9)', 'Moderate (10-14)', 'Severe (15-21)'], datasets: [{ data: [3,14,20,17], backgroundColor: ['#2c3e66','#e67e22','#e67e22cc','#c0392b'], borderWidth:0 }] }, options: { responsive: true, maintainAspectRatio: true, plugins: { legend: { position: 'bottom', labels: { color: '#ddd', font:{size:9} } } } } });
+    // CIPS categories: Low IP (<2.5):26, Moderate (2.5-3.5):19, High (>3.5):9
+    new Chart(document.getElementById('cipsChart'), { type: 'bar', data: { labels: ['Low IP (<2.5)', 'Moderate IP (2.5-3.5)', 'High IP (>3.5)'], datasets: [{ label: 'students', data: [26,19,9], backgroundColor: '#d4a853', borderRadius: 8 }] }, options: { responsive: true, maintainAspectRatio: true, scales: { y: { grid: { color: '#333' }, ticks: { color: '#aaa' } }, x: { ticks: { color: '#ddd' } } }, plugins: { legend: { display: false } } } });
+    // AI hours/day by field (IT, Hum, Med, Art) means: 2.43, 1.41, 1.19, 3.67
+    new Chart(document.getElementById('aiFieldChart'), { type: 'bar', data: { labels: ['IT', 'Humanities', 'Medicine', 'Art'], datasets: [{ label: 'Avg. AI hours/day', data: [2.43,1.41,1.19,3.67], backgroundColor: '#8b5a2b', borderRadius: 8 }] }, options: { responsive: true, scales: { y: { title: { display: true, text: 'hours', color: '#bbb' }, grid: { color: '#2c2c2c' } } }, plugins: { legend: { position: 'top', labels: { color: '#ccc' } } } } });
+    // field distribution pie: IT 21, Hum 17, Med 13, Art 3 => total 54
+    new Chart(document.getElementById('fieldPieChart'), { type: 'pie', data: { labels: ['IT', 'Humanities ', 'Medicine', 'Art'], datasets: [{ data: [21,17,13,3], backgroundColor: ['#c0392b','#e67e22','#d4a853','#2c3e66'] }] }, options: { responsive: true, plugins: { legend: { position: 'bottom', labels: { color: '#ddd', font: { size: 9 } } } } } });
+
+    // among us canvas logic
+    const amongCanvas = document.getElementById('amongCanvas'), aCtx = amongCanvas.getContext('2d');
+    amongCanvas.width = 200; amongCanvas.height = 200;
+    const amongImg = new Image(); amongImg.src = 'assets/among.png';
+    let amongLoaded = false, posX=70, posY=70, targetX=70, targetY=70, frame=0;
+    amongImg.onload = () => { amongLoaded = true; animateAmong(); };
+    function animateAmong() { if(!amongLoaded) return; frame++; if(frame%40===0){ targetX=35+Math.random()*100; targetY=40+Math.random()*90; } posX += (targetX-posX)*0.08; posY += (targetY-posY)*0.08; aCtx.clearRect(0,0,200,200); aCtx.drawImage(amongImg, posX-30, posY-30, 60, 60); requestAnimationFrame(animateAmong); }
+    if(amongImg.complete) amongLoaded=true;
+    amongCanvas.addEventListener('click', () => { window.open('https://among-ai-bd510.web.app/', '_blank'); });
+    document.getElementById('bigResearchLink')?.addEventListener('click', e => { e.preventDefault(); new bootstrap.Modal(document.getElementById('researchModal')).show(); });
+    const observer = new IntersectionObserver((entries) => { entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('visible'); }); }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 </script>
 </body>
 </html>
